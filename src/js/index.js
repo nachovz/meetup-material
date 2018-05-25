@@ -6,12 +6,12 @@ ReactGA.initialize('UA-41629310-5');
 
 
 //include jquery into the bundle and store its contents into the $ variable
-import $ from "jquery";
+//import $ from "jquery";
 //include bootstrap npm library into the bundle
-import 'bootstrap';
+//import 'bootstrap';
 
 //include your index.scss file into the bundle
-import '../styles/index.scss';
+//import '../styles/index.scss';
 
 //import your own components
 import Layout from './Layout.jsx';

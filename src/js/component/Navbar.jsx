@@ -1,106 +1,134 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { Modal } from "react-bootstrap";
-import { Button } from "react-bootstrap";
-import $ from "jquery";
+//import { Modal } from "react-bootstrap";
+//import { Button } from "react-bootstrap";
+//import $ from "jquery";
 
+import { withStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import Switch from '@material-ui/core/Switch';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormGroup from '@material-ui/core/FormGroup';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+import Button from '@material-ui/core/Button';
 
-import MeetupActions from '../actions/MeetupActions.jsx';
+import {UserContext} from '../component/user-context';
 
-export default class Navbar extends React.Component{
+import Login from './Login.jsx';
+
+const styles = {
+  root: {
+    flexGrow: 1
+  },
+  flex: {
+    flex: 1
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20
+  },
+  text: {
+    color: "white",
+    textDecoration: "none"
+  }
+};
+
+class Navbar extends React.Component{
+    
+    handleChange(event, checked) {
+        this.setState({ auth: checked });
+    }
+    
+    handleMenu(event) {
+        this.setState({ anchorEl: event.currentTarget });
+    }
+    
+    handleClose(){
+        this.setState({ anchorEl: null });
+    }
+
     constructor(props, context){
         super(props, context);
         
-        this.login = this.login.bind(this);
-        this.handleChangeUser = this.handleChangeUser.bind(this);
-        this.handleChangePass = this.handleChangePass.bind(this);
-    
+        this.handleMenu = this.handleMenu.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        
         this.state = {
-          username: '',
-          password: ''
+            auth: false,
+            anchorEl: null
         };
     }
     
-    handleChangeUser(e){
-        let tempState = this.state;
-        tempState.username = e.target.value;
-        this.setState(tempState);
-    }
-    
-    handleChangePass(e){
-        let tempState = this.state;
-        tempState.password = e.target.value;
-        this.setState(tempState);
-    }
-    
-    // This will be called when the user clicks on the login button
-    login(e) {
-        e.preventDefault();
-        // Here, we call an external AuthService. We’ll create it in the next step
-        //MeetupActions.loadSession(this.state.username, this.state.password);
-        MeetupActions.loadSession(e.target[0].value, e.target[1].value);
-        return false;
-    }
-    
     render(){
-        let userInfo = <div></div>;
-            if( typeof(this.props.sessionData.user_nicename) !== 'undefined'){
-                $('#exampleModal').modal('hide');
-                userInfo =
-                    <div className="d-flex">
-                        <Link className="nav-item nav-link " to={"/user/"+this.props.sessionData.user_nicename.value}>
-                                Hello, {this.props.sessionData.user_display_name.charAt(0).toUpperCase()+this.props.sessionData.user_display_name.substring(1)}
-                        </Link>
-                    </div>;
-            }else{
-                userInfo = <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onClick={this.handleShow}>Login</button>;
-            }
+        const { classes } = this.props;
+        const { auth, anchorEl } = this.state;
+        const open = Boolean(anchorEl);
             
         let homeActive = this.props.currentView === "home" ? "active" :"";
         
         return(
-            <div>
-                <nav className="navbar navbar-light bg-light justify-content-between navbar-expand-sm">
-                    <a className="navbar-brand">OurMeetup</a>
-                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-                        <div className="navbar-nav">
-                            {userInfo}
-                            <Link className={"nav-item nav-link "+homeActive} to="/">Dashboard </Link>
-                            {/*<a onClick={() => sessionActions.authenticateUser()}>Login</a>*/}
-                        </div>
+            <div className={classes.root}>
+                <AppBar position="fixed">
+                    <Toolbar>
+                        <Typography variant="title" color="inherit" className={classes.flex}>
+                            <Link className={classes.text} to={"/"}>4GeeksAcademy Events</Link>
+                        </Typography>
                         
-                    </div>
-                </nav>
-                <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div className="modal-dialog" role="document">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="modal-title" id="exampleModalLabel">Login</h5>
-                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div className="modal-body">
-                                <form role="form" onSubmit={this.login}>
-                                    <div className="form-group">
-                                        <input type="text" name="user" value={this.state.user} placeholder="Username" onChange={this.handleChangeUser} />
-                                        <input type="password" name="password" value={this.state.password} placeholder="Password" onChange={this.handleChangePass} />
-                                    </div>
-                                    <input type="submit" value="Login" />
-                                </form>
-                            </div>
+                        {auth && (
+                        <div>
+                            <IconButton
+                              aria-owns={open ? 'menu-appbar' : null}
+                              aria-haspopup="true"
+                              onClick={this.handleMenu}
+                              color="inherit"
+                            >
+                                <AccountCircle />
+                            </IconButton>
+                            <Menu
+                              id="menu-appbar"
+                              anchorEl={anchorEl}
+                              anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right'
+                              }}
+                              transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right'
+                              }}
+                              open={open}
+                              onClose={this.handleClose}
+                            >
+                                <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+                                <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                            </Menu>
                         </div>
-                    </div>
-                </div>
+                        ) }
+                        {!auth && (
+                        <div>
+                            <UserContext.Consumer>
+                                { (user) => (
+                                    <Login sessionData={user} />
+                                ) }
+                            </UserContext.Consumer>
+                        </div>
+                        ) }
+                    </Toolbar>
+                </AppBar>
             </div>
             );
     }
 }
 Navbar.propTypes = {
   sessionData: PropTypes.object,
-  currentView: PropTypes.string
+  currentView: PropTypes.string,
+  classes: PropTypes.object.isRequired
 };
+export default withStyles(styles)(Navbar);

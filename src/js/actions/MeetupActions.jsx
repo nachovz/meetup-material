@@ -1,5 +1,6 @@
 import Flux from "@4geeksacademy/react-flux-dash";
 import ReactGA from 'react-ga';
+import {UserContext} from '../component/user-context';
 
 class MeetupActions extends Flux.Action{
   
@@ -101,11 +102,9 @@ class MeetupActions extends Flux.Action{
         'Content-Type': 'application/json'
         })
     })
-    .then( (response) => {
-        // We get a JWT back.
-        if (response.status !== 200 ) throw new Error(response);
+    .then( function(answer) {
         
-        return response.json();
+        return answer.json();
         
     }).then( (data) => {
         
@@ -114,7 +113,10 @@ class MeetupActions extends Flux.Action{
         this.dispatch('MeetupStore.setSession', data); 
         this.loadApiEvents(data.token);
         ReactGA.set({ userId: data.user_nicename });
-        
+        /*UserContext.loginUser = (data) => {
+          this.username = data.user_nicename;
+          this.token = data.token;
+        };*/
     }).catch(error => {
       this.dispatch('MeetupStore.error', error);
     });
