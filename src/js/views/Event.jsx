@@ -1,21 +1,110 @@
 import React from "react";
 import Flux from "@4geeksacademy/react-flux-dash";
-import { Link } from "react-router-dom";
-import Navbar from '../component/Navbar.jsx';
 import Moment from "moment";
 import ReactGA from 'react-ga';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
+import { withStyles } from '@material-ui/core/styles';
+import classnames from 'classnames';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import Collapse from '@material-ui/core/Collapse';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import GroupIcon from '@material-ui/icons/Group';
+import ShareIcon from '@material-ui/icons/Share';
+import LocationCityIcon from '@material-ui/icons/LocationCity';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import DirectionsIcon from '@material-ui/icons/Directions';
+import LabelIcon from '@material-ui/icons/Label';
+import CheckIcon from '@material-ui/icons/Check';
+import AnnouncementIcon from '@material-ui/icons/Announcement';
+import Button from '@material-ui/core/Button';
+import Tooltip from '@material-ui/core/Tooltip';
+import Chip from '@material-ui/core/Chip';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+import Navbar from '../component/Navbar.jsx';
 import meetupStore from '../stores/MeetupStore.jsx';
-import meetupActions from '../actions/MeetupActions.jsx';
 
-export default class Event extends Flux.View {
+const styles = theme => ({
+  card: {
+    maxWidth: 1000,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginBottom: 100
+  },
+  media: {
+    height: 0,
+    paddingTop: '56.25%' // 16:9
+  },
+  actions: {
+    display: 'flex'
+  },
+  expand: {
+    transform: 'rotate(0deg)',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest
+    }),
+    marginLeft: 'auto'
+  },
+  expandOpen: {
+    transform: 'rotate(180deg)'
+  },
+  avatar: {
+    margin: 10
+  },
+  bigAvatar: {
+    width: 60,
+    height: 60
+  },
+  margin: {
+    marginRight: theme.spacing.unit * 2,
+    marginBottom: theme.spacing.unit
+  },
+  progress: {
+    margin: theme.spacing.unit * 2
+  },
+  badgesContainer: {
+    padding: theme.spacing.unit+"px 0",
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "flex-end",
+    flexWrap: "wrap"
+  },
+  chip: {
+    marginLeft: 0,
+    color: theme.palette.primary.contrastText,
+    backgroundColor: theme.palette.secondary.dark
+  },
+  chipAvatar: {
+    backgroundColor: theme.palette.primary.contrastText
+  },
+  clickable: {
+    boxShadow: "0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12)"
+  },
+  fab: {
+    position: 'fixed',
+    bottom: theme.spacing.unit * 2,
+    right: theme.spacing.unit * 2
+  }
+});
+
+class Event extends Flux.View {
     
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         
         this.state = {
-            event: {},
-            session: {}
+            event: meetupStore.getEvent(props.match.params.theid),
+            session: {},
+            expanded: false
         };
         
         this.bindStore(meetupStore, function(){
@@ -36,155 +125,176 @@ export default class Event extends Flux.View {
     }
     
     render(){
+        const { classes } = this.props;
+        const event = this.state.event;
         ReactGA.pageview(window.location.pathname + window.location.search);
-        if( typeof this.state.event === 'undefined' ) return(<h2>Loading</h2>);
-        let yesDisabled = "";
-        let noDisabled = "";
-        if(typeof this.state.event.meta_keys._rsvpYes !== 'undefined'){
-            yesDisabled = this.state.event.meta_keys._rsvpYes.includes(this.state.session.user_nicename) ? "disabled" : "";
-        }
-        if(typeof this.state.event.meta_keys._rsvpNo !== 'undefined'){
-            noDisabled = this.state.event.meta_keys._rsvpNo.includes(this.state.session.user_nicename) ? "disabled" : "";
+        
+        if(!event){
+            return(<CircularProgress className={classes.progress} color="secondary" />);
         }
         
-        let rsvpButtons = typeof(this.state.session.user_nicename) === 'undefined' ? 
-            <div className="row rsvpBTN flex-nowrap"> 
-                <div className="col-md-10"> 
-                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onClick={this.handleShow}>Login!</button>
-                </div>
-            </div> 
-        :
-            <div className="row rsvpBTN flex-nowrap">
-                <div className="col-md-5">
-                    <button type="button" className="btn btn-primary w-100 yesBTN" disabled={yesDisabled} onClick={() => meetupActions.rsvpEvent(this.props.match.params.theid, this.state.session.user_nicename, "yes", meetupStore.getToken())}>Yes</button>
-                </div>
-                <div className="col-md-5">
-                    <button type="button" className="btn btn-primary w-100 noBTN" disabled={noDisabled} onClick={() => meetupActions.rsvpEvent(this.props.match.params.theid, this.state.session.user_nicename, "no", meetupStore.getToken())}>No</button>
-                </div>
-            </div>;
+        let eventDay, eventTime = eventDay = "TBA";
+        if( event.event_date !== null ){
+            eventDay = event.event_date.replace(/\s/g, 'T');
+            eventDay = eventDay.replace(/-/g, '').replace(/:/g, '');
+            eventDay = Moment(eventDay);
+            eventTime = eventDay.format("h:mm a").toString();
+            eventDay = eventDay.format("MMMM D").toString();
+        }
         
-        
-        let aDate = Moment( this.state.event.meta_keys.day+"T"+this.state.event.meta_keys.time.replace(/:/g,"") );
-        
-        let theMeetup = typeof(this.state.event.meetup) != 'undefined' ? this.state.event.meetup : {ID:0,post_title:"Loading"};
-                
-        return(
-            <div>
-                {/*this is the nav and logo bar */}
-                <Navbar sessionData={this.state.session} />
+        let descSummary, descRest = descSummary = "";
+        if( event.description ){
+            descSummary = event.description.substring(0, event.description.indexOf('.',80)+1);
+            descRest = event.description.substring(event.description.indexOf('.',80)+1);
+        }
 
-                {/*this is the jumbotron info bar */}
-                <div className="jumbotron jumbotron-fluid eventHero">
-                    <div className="container-fluid">
-                        <div className="row">
-                            {/*left side */}
-                            <div className="col-md-8 jumboLeft">
-                                <div className="row">
-                                    <div className="col-12">
-                                        <p className="eventDate">{aDate.format("MMM D").toString()}</p>
-                                        <h1 className="eventTitle">{this.state.event.post_title}</h1>
-                                        <div className="row">
-                                            <div className="col-md-2 text-center">
-                                        
-                                                <img src="//placehold.it/50" className="rounded-circle" />
-                                            </div>
-                                            <div className="col-md-10 pt-1">
-                                                <span className="text">Hosted by</span>
-                                                <span className="link"> <Link to="/"> Mr. Whiskers</Link></span>
-                                                <p>
-                                                    <span className="text">From</span>
-                                                    <span className="link"> 
-                                                        <Link to={"/meetup/"+theMeetup.ID}> {theMeetup.post_title}</Link>
-                                                    </span>
-                                                </p>
-                                            </div>        
-                                        </div>  
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/*right side */}
-                            <div className="col-md-4 jumboRight">
-                                <div className="attendance">
-                                    <p><strong>Are you going?</strong> X people going</p>
-                                </div>
-                                {rsvpButtons}
-                                <div className="row socialMedia flex-nowrap">
-                                    <div className="col-md-6">
-                                        <button type="button" className="btn-floating btn-sm btn-twi"><i className="fab fa-twitter"></i></button>
-                                        <span>Tweet It</span>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <a type="button" className="btn-floating btn-sm btn-fb"><i className="fab fa-facebook-f"></i></a>
-                                        <span>Share It</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    return (
+        <div>
+            <Navbar sessionData={this.state.session} />
+            <Card className={classes.card}>
+                <CardHeader
+                avatar={
+                    <Avatar
+                        aria-label="Recipe"
+                        src={event.logo_url}
+                        className={classNames(classes.avatar, classes.bigAvatar)}
+                    />
+                }
+                title={event.title}
+                subheader={eventDay+" "+eventTime}
+                />
+                <CardContent>
+                    <div className={classes.badgesContainer}>
+                        { event.address && (
+                            <CustomChip 
+                                classes={classes} 
+                                label={event.address}
+                                clickable={true}
+                                onClick={() => window.open("https://maps.google.com/maps?q="+event.address , "_blank")}
+                                icon={<DirectionsIcon />}
+                            />
+                            )
+                        }
+                        { event.capacity && (
+                            <CustomChip 
+                                classes={classes} 
+                                label={event.capacity}
+                                tooltipTitle="Capacity"
+                                icon={<GroupIcon/>}
+                            />
+                            )
+                        }
+                        { event.type && (
+                            <CustomChip 
+                                classes={classes} 
+                                label={event.type}
+                                tooltipTitle="Type"
+                                icon={<LabelIcon/>}
+                            />
+                            )
+                        }
+                        { event.city_slug && (
+                            <CustomChip 
+                                classes={classes} 
+                                label={event.city_slug.toUpperCase()}
+                                icon={<LocationCityIcon/>}
+                            />
+                            )
+                        }
+                        { event.invite_only === "1" && (
+                            <CustomChip 
+                                classes={classes} 
+                                label="Invitation required"
+                                tooltipTitle="Invitation Only"
+                                icon={<AnnouncementIcon/>}
+                            />
+                            )
+                        }
                     </div>
+                    <Typography component="p">
+                        {descSummary}
+                    </Typography>
+                </CardContent>
+                <CardActions className={classes.actions} disableActionSpacing>
+                    <IconButton aria-label="Add to favorites">
+                        <FavoriteIcon />
+                    </IconButton>
+                    <IconButton aria-label="Share">
+                        <ShareIcon />
+                    </IconButton>
 
-                    {/*body of page */}
-                    <div className="container-fluid">
-                        <div className="row">
-
-                            {/*body right side...when using order you're saying MEDIUM and up will be second*/}
-                            <div className="col-md-4 order-md-2">
-                                <div className="card smallCard">
-                                    <div className="card-body">
-                                        <div className="row cardInfo">
-                                            <div>
-                                                <span> <i className="far fa-clock"></i></span>
-                                            </div>
-                                            <div>
-                                                <span className="card-date">{aDate.format("dddd, MMMM DD, YYYY").toString()}</span><br/>
-                                                <span className="card-time">{aDate.format("h:mm a").toString()}</span><br/>
-                                                <span className="card-schedule">Every first and last Tuesday of the month</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <img top ="w-100" src="http://via.placeholder.com/350x150" alt="map of the location" />                            
-                                    
-                                </div>
-                            </div>
-
-                            {/*body left side*/}
-                            <div className="col-md-8 order-md-1">
-                                <div className="row">
-                                    <div className="col-12">
-                                        <img className="img-fluid eventPhoto" src="http://via.placeholder.com/500X300" alt="event image of..." />
-                                        <h5 className="details"><strong>Details</strong></h5>
-                                        <p className="bodyText">Snuggle up with cute kitties, hot lattes, and a book. We host this event twice a month for a place to socialize or maybe come out for alternative therapy.<br/><br/>There are a few rules to follow for this event:</p>
-                                        <ul>
-                                            <li>You must purchase a beverage (e.g. coffee, tea, cocoa, etc)</li>
-                                            <li>Stay as long as you like but only 30 minutes with each cat</li>
-                                            <li>Be kind to cats and humans alike</li>
-                                            <li>No children under 12 years old. This event is an escape for most people who attend</li>
-                                            <li>Must wear headphones for phone calls and music</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* the footer */}
-                    <footer className="footer" id="footer">
-                        <div className="container">
-                            <div className="row justify-content-between">
-                                <div className="col-6">
-                                    <img className="img-fluid" src="http://placehold.it/50x50" alt="" />
-                                </div>
-                                <div className="col-6">
-                                    <ul className="footer__links list-inline text-right">
-                                        <li className="footer__link list-inline-item">Blog</li>
-                                        <li className="footer__link list-inline-item">Contact Us</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </footer>
-                </div>
-            </div>
+                    <IconButton
+                    className={classnames(classes.expand, {
+                    [classes.expandOpen]: this.state.expanded
+                    })}
+                    onClick={() => this.setState({ expanded: !this.state.expanded })}
+                    aria-expanded={this.state.expanded}
+                    aria-label="Show more"
+                    >
+                        <ExpandMoreIcon />
+                    </IconButton>
+                </CardActions>
+                <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+                    <CardContent>
+                        <Typography component="p">
+                            {descRest}
+                        </Typography>
+                    </CardContent>
+                </Collapse>
+                <Button 
+                    variant="fab" 
+                    color="primary" 
+                    className={classNames(classes.button, classes.fab)} 
+                    onClick={() => window.open(event.url,"_blank")}>
+                    <Tooltip open={true} title="RSVP ➤" placement="left">
+                        <CheckIcon/>
+                    </Tooltip>
+                </Button>
+            </Card>
+        </div>
         );
     }
 }
+export default withStyles(styles,{ withTheme: true })(Event);
+
+function CustomChip(props){
+    return  props.tooltipTitle ? (
+        <Tooltip id="tooltip-icon" title={props.tooltipTitle}>
+            <Chip
+                avatar={
+                    <Avatar
+                        className={props.classes.chipAvatar}
+                    >
+                        {props.icon}
+                    </Avatar>
+                }
+                label={props.label}
+                className={classNames(props.classes.margin, props.classes.chip, (props.clickable ? props.classes.clickable: '') )}
+                onClick={props.onClick}
+                clickable={props.clickable}
+            /> 
+        </Tooltip>
+        ) : (
+            <Chip
+                avatar={
+                    <Avatar
+                        className={props.classes.chipAvatar}
+                    >
+                        {props.icon}
+                    </Avatar>
+                }
+                label={props.label}
+                className={classNames(props.classes.margin, props.classes.chip, (props.clickable ? props.classes.clickable: '') )}
+                onClick={props.onClick}
+                clickable={props.clickable}
+            /> 
+        );
+}
+CustomChip.propTypes = {
+  classes: PropTypes.object,
+  label: PropTypes.string,
+  onClick: PropTypes.func,
+  clickable: PropTypes.bool,
+  tooltipTitle: PropTypes.string,
+  icon: PropTypes.element
+};

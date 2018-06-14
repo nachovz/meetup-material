@@ -11,15 +11,24 @@ import Menu from '@material-ui/core/Menu';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Avatar from '@material-ui/core/Avatar';
+import { withTheme } from '@material-ui/core/styles';
+
 import PropTypes from "prop-types";
-
 import {UserContext} from '../component/user-context';
-
 import MeetupActions from '../actions/MeetupActions.jsx';
 
-export default class Login extends React.Component {
-    constructor(props, context){
-        super(props, context);
+/**
+ * @render react
+ * @name Login
+ * @description Login button/functionality it includes modal display and icon display: First two letters (default), Avatar image
+ * @example
+ * <Login
+ *   sessionData={user_nicename:"Octocat", avatar:"https://avatars3.githubusercontent.com/u/1026077?s=40&v=4"}
+ * />
+ */
+class Login extends React.Component {
+    constructor(props){
+        super(props);
         
         this.handleClickOpen = this.handleClickOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
@@ -106,10 +115,10 @@ export default class Login extends React.Component {
                             />
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={this.handleClose} color="primary">
+                            <Button onClick={this.handleClose} color="secondary">
                                 Cancel
                             </Button>
-                            <Button onClick={this.login} color="primary">
+                            <Button onClick={this.login} color="secondary">
                                 Login
                             </Button>
                         </DialogActions>
@@ -123,7 +132,6 @@ export default class Login extends React.Component {
                       onClick={this.handleMenu}
                       color="inherit"
                     >
-                        
                         <Avatar>{this.props.sessionData.user_nicename.substring(0,2).toUpperCase()}</Avatar>
                     </IconButton>
                     <Menu
@@ -151,3 +159,5 @@ export default class Login extends React.Component {
 Login.propTypes = {
   sessionData: PropTypes.object
 };
+
+export default withTheme()(Login);

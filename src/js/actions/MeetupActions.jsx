@@ -4,7 +4,7 @@ import {UserContext} from '../component/user-context';
 
 class MeetupActions extends Flux.Action{
   
-  loadApiMeetups(){
+  /*loadApiMeetups(){
         //fetch('https://assets.breatheco.de/apis/meetup/meetups')
         fetch('https://wordpress-breathecode-cli-nachovz.c9users.io/wp-json/sample_api/v1/meetups')
             .then( (response) => {
@@ -85,6 +85,25 @@ class MeetupActions extends Flux.Action{
       }
       this.loadApiEvents(token);
     });
+  }*/
+  
+  loadApiEvents(){
+      fetch('https://assets.breatheco.de/apis/event/all')
+          .then( (response) => {
+            if (response.status !== 200) {
+                throw new Error(response.statusText);
+            }
+              return response.json();
+              
+          }).then( (data) => {
+              
+              if (!Array.isArray(data)) {
+                throw new Error(data);//TO-DO: Documentation on error cases
+              }
+              this.dispatch('MeetupStore.loadDataEvents', data);  
+          }).catch(error => {
+            this.dispatch('MeetupStore.error', error);
+          });
   }
   
   loadSession(username, password){
@@ -113,24 +132,9 @@ class MeetupActions extends Flux.Action{
         this.dispatch('MeetupStore.setSession', data); 
         this.loadApiEvents(data.token);
         ReactGA.set({ userId: data.user_nicename });
-        /*UserContext.loginUser = (data) => {
-          this.username = data.user_nicename;
-          this.token = data.token;
-        };*/
     }).catch(error => {
       this.dispatch('MeetupStore.error', error);
     });
-  
-    //Simulating user ID
-    /*
-    fetch('https://randomuser.me/api/?inc=id,name,picture')
-    .then(res => res.json())
-    .catch(error => {
-      //console.error('Error:', error)
-    })
-    .then(response => {
-      this.dispatch('MeetupStore.setSession', response);
-    });*/
   }
   
 }

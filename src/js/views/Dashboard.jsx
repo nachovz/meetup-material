@@ -3,18 +3,25 @@ import Flux from "@4geeksacademy/react-flux-dash";
 import { Link } from "react-router-dom";
 import InfiniteCalendar from 'react-infinite-calendar';
 import 'react-infinite-calendar/styles.css';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+
 import ReactGA from 'react-ga';
 import Navbar from '../component/Navbar.jsx';
+import PaperSheet from '../component/PaperSheet.jsx';
+import EventPaperSheet from '../component/EventPaperSheet.jsx';
+//import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 import meetupStore from '../stores/MeetupStore.jsx';
 import meetupActions from '../actions/MeetupActions.jsx';
 
-/*IGNORE FOR NOW*/
-import sessionStore from '../stores/SessionStore.jsx';
-import sessionActions from '../actions/SessionActions.jsx';
-
 import moment from "moment";
-
 
 export default class Dashboard extends Flux.View {
     
@@ -23,16 +30,17 @@ export default class Dashboard extends Flux.View {
         
         this.state = {
             events: meetupStore.getAllEvents(),
-            session: meetupStore.getSession()
+            session: meetupStore.getSession(),
+            filter: ''
         };
         
         this.bindStore(meetupStore, function(){
-            // retreive events data
             this.setState({
                 events: meetupStore.getAllEvents(),
                 session: meetupStore.getSession()
             });
         });
+        this.handleChange = this.handleChange.bind(this);
         /*this.bindStore(meetupStore, 'CONTENT_LOADED', (data) => {
             console.log("Dashboard:CONTENT_LOADED", data); 
             const events = meetupStore.getAllEvents();
@@ -54,6 +62,10 @@ export default class Dashboard extends Flux.View {
     componentWillUnmount(){
     }
     
+    handleChange(event){
+        this.setState({ [event.target.name]: event.target.value });
+    }
+    
     render(){
         //GA Pageview
         ReactGA.pageview(window.location.pathname + window.location.search);
@@ -62,74 +74,52 @@ export default class Dashboard extends Flux.View {
         var today = new Date();
         var lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
         
-        //if(allEvents.length < 1) return(<h2>No events soon</h2>); 
-        
         var allEvents = this.state.events.length < 1 ? 
-            <div> 
-                <h2>No events soon</h2> 
+            <PaperSheet text="No Events"/>
+            : this.state.events.map((event) =>{
                 
-            </div>: this.state.events.map((event) =>{
-            
-            //IMPORT moment.js
-            let aTime = event.meta_keys.day+"T"+event.meta_keys.time.replace(/:/g,'');
-            let eventDay = moment(aTime);
-            event.meetup = typeof( event.meetup ) === 'undefined' ? { ID : 0, post_title : "" } : event.meetup;
-            
-            return(
-                <div className="card w-100" key={event.ID}>
-                    <div className="card-header">
-                        <h2>{eventDay.format("MMMM D").toString()}</h2>
-                    </div>
-                    <div className="card-body">
-                        <div className="row">
-                            <div className="col-3">
-                                <h3>{eventDay.format("h:mm a").toString()}</h3>
-                            </div>
-                            <div className="col-9">
-                                <h5 className="card-title">{event.post_title}</h5>
-                                <h6>
-                                    <Link className="card-text" to={"/meetup/"+event.meetup.ID} > {event.meetup.post_title} </Link>
-                                </h6>
-                                <Link to={"/event/"+event.ID} className="btn btn-primary">View</Link>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            ); 
+                if(this.state.filter === event.type || this.state.filter === '' || this.state.filter === 'All') return(
+                    <EventPaperSheet key={event.id} event={event}/>
+                ); 
         });
         
         return(
-            <div>
-                
-                <Navbar sessionData={this.state.session} currentView="home" />
-
-                <div className="jumbotron jumbotron-fluid" >
-                    <div className="container text-center">
-                        <h1 className="display-4">Fluid jumbotron</h1>
-                        <p className="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
-                    </div>
-                </div>
-
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-8">
-                            <div className="row">
-                                {allEvents}
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <InfiniteCalendar
-                                width={400}
-                                height={600}
-                                selected={today}
-                                disabledDays={[0,6]}
-                                minDate={lastWeek}
-                            />
-                        </div>
-                    </div>
-                </div>
+            <div style={{flexGrow:1}}>
+                <Navbar currentView="home" />
+                <Grid container spacing={8} style={{justifyContent: 'center'}} >
+                    <Grid item xs md={8} >
+                        <Paper style={{padding:16, display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+                            <Typography component="h1" variant="headline">
+                                All Events
+                            </Typography>
+                            <form autoComplete="off">
+                                <FormControl style={{marginTop: 0,minWidth: 120}}>
+                                    <InputLabel htmlFor="filter-simple">Filter</InputLabel>
+                                    <Select
+                                        value={this.state.filter}
+                                        onChange={this.handleChange}
+                                        inputProps={{
+                                            name: 'filter',
+                                            id: 'filter-simple'
+                                        }}
+                                        >
+                                        <MenuItem value="All">
+                                            <em>All</em>
+                                        </MenuItem>
+                                        <MenuItem value={'workshop'}>Workshop</MenuItem>
+                                        <MenuItem value={'hackathon'}>Hackathon</MenuItem>
+                                        <MenuItem value={'intro_to_coding'}>Intro to Coding</MenuItem>
+                                        <MenuItem value={'coding_weekend'}>Coding Weekend</MenuItem>
+                                        <MenuItem value={'4geeks_night'}>4Geeks Night</MenuItem>
+                                        <MenuItem value={'other'}>Other</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </form>
+                        </Paper>
+                        {allEvents.find(element=> element) ? allEvents : <PaperSheet text="No Events"/> }
+                    </Grid>
+                </Grid>
             </div>
-            );
+        );
     }
-    
 }

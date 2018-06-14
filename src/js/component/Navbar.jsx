@@ -1,10 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-//import { Modal } from "react-bootstrap";
-//import { Button } from "react-bootstrap";
-//import $ from "jquery";
-
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -18,6 +14,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
+import Avatar from '@material-ui/core/Avatar';
 
 import {UserContext} from '../component/user-context';
 
@@ -25,7 +22,8 @@ import Login from './Login.jsx';
 
 const styles = {
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    marginBottom: 80
   },
   flex: {
     flex: 1
@@ -37,6 +35,10 @@ const styles = {
   text: {
     color: "white",
     textDecoration: "none"
+  },
+  navBar: {
+      backgroundColor: "black",
+      color: "#fff"
   }
 };
 
@@ -71,55 +73,60 @@ class Navbar extends React.Component{
         const { classes } = this.props;
         const { auth, anchorEl } = this.state;
         const open = Boolean(anchorEl);
+        const loginEnabled = this.props.loginEnabled || false;
             
         let homeActive = this.props.currentView === "home" ? "active" :"";
         
         return(
             <div className={classes.root}>
-                <AppBar position="fixed">
+                <AppBar position="fixed" className={classes.navBar} >
                     <Toolbar>
-                        <Typography variant="title" color="inherit" className={classes.flex}>
-                            <Link className={classes.text} to={"/"}>4GeeksAcademy Events</Link>
-                        </Typography>
+                        <Link className={classes.text} to={"/"}>
+                            <img
+                                src="http://assets.breatheco.de/apis/img/images.php?blob&random&cat=logo&tags=4geeks,white,small"
+                                width="100"
+                            />
+                        </Link>
                         
-                        {auth && (
-                        <div>
-                            <IconButton
-                              aria-owns={open ? 'menu-appbar' : null}
-                              aria-haspopup="true"
-                              onClick={this.handleMenu}
-                              color="inherit"
-                            >
-                                <AccountCircle />
-                            </IconButton>
-                            <Menu
-                              id="menu-appbar"
-                              anchorEl={anchorEl}
-                              anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right'
-                              }}
-                              transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right'
-                              }}
-                              open={open}
-                              onClose={this.handleClose}
-                            >
-                                <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                                <MenuItem onClick={this.handleClose}>My account</MenuItem>
-                            </Menu>
-                        </div>
-                        ) }
-                        {!auth && (
-                        <div>
-                            <UserContext.Consumer>
-                                { (user) => (
-                                    <Login sessionData={user} />
-                                ) }
-                            </UserContext.Consumer>
-                        </div>
-                        ) }
+                        {loginEnabled && (
+                            auth ? (
+                                <div>
+                                    <IconButton
+                                      aria-owns={open ? 'menu-appbar' : null}
+                                      aria-haspopup="true"
+                                      onClick={this.handleMenu}
+                                      color="inherit"
+                                    >
+                                        <AccountCircle />
+                                    </IconButton>
+                                    <Menu
+                                      id="menu-appbar"
+                                      anchorEl={anchorEl}
+                                      anchorOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right'
+                                      }}
+                                      transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right'
+                                      }}
+                                      open={open}
+                                      onClose={this.handleClose}
+                                    >
+                                        <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+                                        <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                                    </Menu>
+                                </div>
+                            ) : (
+                                <div>
+                                    <UserContext.Consumer>
+                                        { (user) => (
+                                            <Login sessionData={user} />
+                                        ) }
+                                    </UserContext.Consumer>
+                                </div>
+                            )
+                        )}
                     </Toolbar>
                 </AppBar>
             </div>
@@ -129,6 +136,7 @@ class Navbar extends React.Component{
 Navbar.propTypes = {
   sessionData: PropTypes.object,
   currentView: PropTypes.string,
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  loginEnabled: PropTypes.bool
 };
 export default withStyles(styles)(Navbar);

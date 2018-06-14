@@ -11,14 +11,14 @@ import meetupActions from './actions/MeetupActions.jsx';
 import meetupStore from './stores/MeetupStore.jsx';
 import {UserContext} from './component/user-context';
 
-//const UserContext = React.createContext('anonymous');
 
 export default class Layout extends Flux.View {
   
   constructor(){
     super();
-    meetupActions.loadApiMeetups();
-    meetupActions.loadApiEvents(meetupStore.getToken());
+    //meetupActions.loadApiMeetups();
+    //meetupActions.loadApiEvents(meetupStore.getToken());
+    meetupActions.loadApiEvents();
     //meetupActions.loadSession();
     this.state = {
       session: {
