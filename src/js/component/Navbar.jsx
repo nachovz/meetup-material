@@ -23,7 +23,7 @@ import Login from './Login.jsx';
 const styles = {
   root: {
     flexGrow: 1,
-    marginBottom: 80
+    marginBottom: 45
   },
   flex: {
     flex: 1
@@ -35,10 +35,6 @@ const styles = {
   text: {
     color: "white",
     textDecoration: "none"
-  },
-  navBar: {
-      backgroundColor: "black",
-      color: "#fff"
   }
 };
 

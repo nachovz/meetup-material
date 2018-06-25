@@ -37,24 +37,22 @@ export default class Layout extends Flux.View {
   
   render() {
     return (
-        <div>
+        <React.Fragment>
             <BrowserRouter>
                 <ScrollToTop>
-                    <div>
-                        <Switch>
-                            <UserContext.Provider value={this.state.session}>
-                                <Route exact path="/" component={Dashboard} />
-                                <Route path="/dashboard" component={Dashboard} />
-                                <Route path="/event/:theid" component={Event} />
-                                <Route path="/meetup/:theid" component={Meetup} />
-                                <Route path="/login" component={Login} />
-                            </UserContext.Provider>
-                            <Route render={() => <h1>Not found!</h1>} />
-                        </Switch>
-                    </div>
+                    <Switch>
+                        <UserContext.Provider value={this.state.session}>
+                            <Route exact path="/" component={Dashboard} />
+                            <Route path="/dashboard" component={Dashboard} />
+                            <Route path="/event/:theid" component={Event} />
+                            <Route path="/meetup/:theid" component={Meetup} />
+                            <Route path="/login" component={Login} />
+                        </UserContext.Provider>
+                        <Route render={() => <h1>Not found!</h1>} />
+                    </Switch>
                 </ScrollToTop>
             </BrowserRouter>
-        </div>
+        </React.Fragment>
     );
   }
 }

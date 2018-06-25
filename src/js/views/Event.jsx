@@ -149,7 +149,7 @@ class Event extends Flux.View {
         }
 
     return (
-        <div>
+        <React.Fragment>
             <Navbar sessionData={this.state.session} />
             <Card className={classes.card}>
                 <CardHeader
@@ -251,7 +251,7 @@ class Event extends Flux.View {
                     </Tooltip>
                 </Button>
             </Card>
-        </div>
+        </React.Fragment>
         );
     }
 }
