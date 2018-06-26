@@ -55,7 +55,7 @@ const styles = theme => ({
   buttoners:{
     justifyContent: 'center',
     alignSelf: 'center'
-  },
+  }/*,
   chip: {
     margin: theme.spacing.unit,
     marginLeft: 0,
@@ -63,7 +63,7 @@ const styles = theme => ({
   },
   avatarChip: {
     color: theme.palette.secondary.main
-  },
+  }*/,
   heroUnit:{
       display: "flex", 
       justifyContent: "center",
@@ -73,9 +73,6 @@ const styles = theme => ({
       padding: "50px",
       flexWrap: "wrap",
       textAlign: "center"
-  },
-  heroText:{
-      fontSize: "2em"
   },
   inlineForm:{
       margin: "0 10px",
@@ -152,7 +149,7 @@ class Dashboard extends Flux.View {
             <div style={{flexGrow:1}}>
                 <Navbar currentView="home" />
                 <div className={classes.heroUnit}>
-                    <Typography component="h2" color="inherit" className={classes.heroText}>Select a location:  </Typography>
+                    <Typography component="h1" variant="display1" color="inherit" className={classes.heroText}>Select a location:  </Typography>
                     <form autoComplete="off">
                         <FormControl className={classes.inlineForm}>
                             <Select
@@ -177,7 +174,7 @@ class Dashboard extends Flux.View {
                             </Select>
                         </FormControl>
                     </form> 
-                    <Typography component="h2" color="inherit" className={classes.heroText}>to discover our available courses, workshops and events.</Typography>
+                    <Typography component="h1" variant="display1" color="inherit" className={classes.heroText}>to discover our available courses, workshops and events.</Typography>
                     
                 </div>
                 <Grid container spacing={8} style={{justifyContent: 'center'}} >

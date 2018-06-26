@@ -3,7 +3,6 @@ import Flux from "@4geeksacademy/react-flux-dash";
 import Moment from "moment";
 import ReactGA from 'react-ga';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 import classnames from 'classnames';
@@ -27,8 +26,8 @@ import CheckIcon from '@material-ui/icons/Check';
 import AnnouncementIcon from '@material-ui/icons/Announcement';
 import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
-import Chip from '@material-ui/core/Chip';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import CustomChip from '../component/CustomChip.jsx';
 
 import Navbar from '../component/Navbar.jsx';
 import meetupStore from '../stores/MeetupStore.jsx';
@@ -212,7 +211,7 @@ class Event extends Flux.View {
                         }
                     </div>
                     <Typography component="p">
-                        {descSummary}
+                        {descSummary}{descRest}
                     </Typography>
                 </CardContent>
                 <CardActions className={classes.actions} disableActionSpacing>
@@ -223,24 +222,7 @@ class Event extends Flux.View {
                         <ShareIcon />
                     </IconButton>
 
-                    <IconButton
-                    className={classnames(classes.expand, {
-                    [classes.expandOpen]: this.state.expanded
-                    })}
-                    onClick={() => this.setState({ expanded: !this.state.expanded })}
-                    aria-expanded={this.state.expanded}
-                    aria-label="Show more"
-                    >
-                        <ExpandMoreIcon />
-                    </IconButton>
                 </CardActions>
-                <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-                    <CardContent>
-                        <Typography component="p">
-                            {descRest}
-                        </Typography>
-                    </CardContent>
-                </Collapse>
                 <Button 
                     variant="fab" 
                     color="primary" 
@@ -257,44 +239,3 @@ class Event extends Flux.View {
 }
 export default withStyles(styles,{ withTheme: true })(Event);
 
-function CustomChip(props){
-    return  props.tooltipTitle ? (
-        <Tooltip id="tooltip-icon" title={props.tooltipTitle}>
-            <Chip
-                avatar={
-                    <Avatar
-                        className={props.classes.chipAvatar}
-                    >
-                        {props.icon}
-                    </Avatar>
-                }
-                label={props.label}
-                className={classNames(props.classes.margin, props.classes.chip, (props.clickable ? props.classes.clickable: '') )}
-                onClick={props.onClick}
-                clickable={props.clickable}
-            /> 
-        </Tooltip>
-        ) : (
-            <Chip
-                avatar={
-                    <Avatar
-                        className={props.classes.chipAvatar}
-                    >
-                        {props.icon}
-                    </Avatar>
-                }
-                label={props.label}
-                className={classNames(props.classes.margin, props.classes.chip, (props.clickable ? props.classes.clickable: '') )}
-                onClick={props.onClick}
-                clickable={props.clickable}
-            /> 
-        );
-}
-CustomChip.propTypes = {
-  classes: PropTypes.object,
-  label: PropTypes.string,
-  onClick: PropTypes.func,
-  clickable: PropTypes.bool,
-  tooltipTitle: PropTypes.string,
-  icon: PropTypes.element
-};
