@@ -3,7 +3,6 @@ import Flux from "@4geeksacademy/react-flux-dash";
 import { Link } from "react-router-dom";
 import { withStyles } from '@material-ui/core/styles';
 import 'react-infinite-calendar/styles.css';
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import AppBar from '@material-ui/core/AppBar';
@@ -15,14 +14,11 @@ import EventPaperSheet from '../component/EventPaperSheet.jsx';
 //import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
 import meetupStore from '../stores/MeetupStore.jsx';
 import meetupActions from '../actions/MeetupActions.jsx';
-
-import moment from "moment";
 
 const styles = theme => ({
   root: theme.mixins.gutters({
@@ -55,15 +51,7 @@ const styles = theme => ({
   buttoners:{
     justifyContent: 'center',
     alignSelf: 'center'
-  }/*,
-  chip: {
-    margin: theme.spacing.unit,
-    marginLeft: 0,
-    backgroundColor: theme.palette.primary.contrastText
   },
-  avatarChip: {
-    color: theme.palette.secondary.main
-  }*/,
   heroUnit:{
       display: "flex", 
       justifyContent: "center",
@@ -102,20 +90,14 @@ class Dashboard extends Flux.View {
         this.bindStore(meetupStore, function(){
             this.setState({
                 events: meetupStore.getAllEvents(),
-                session: meetupStore.getSession()
+                session: meetupStore.getSession(),
+                locations: meetupStore.getLocations(),
+                filter: 'All',
+                locationFilter: 'All',
+                languageFilter: 'All'
             });
         });
         this.handleChange = this.handleChange.bind(this);
-        /*this.bindStore(meetupStore, 'CONTENT_LOADED', (data) => {
-            console.log("Dashboard:CONTENT_LOADED", data); 
-            const events = meetupStore.getAllEvents();
-            this.setState({events:events}); 
-        });
-        this.bindStore(meetupStore, 'ERROR', function(data){
-            console.log("HOME:ERROR", data);    
-            //alert(meetupStore.getError());
-            
-        });*/
     }
     
     handleChange(event){
@@ -126,24 +108,6 @@ class Dashboard extends Flux.View {
         const { classes } = this.props;
         //GA Pageview
         ReactGA.pageview(window.location.pathname + window.location.search);
-        
-        // Render the Calendar
-        var today = new Date();
-        var lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
-        
-        var allEvents = this.state.events.length < 1 ? 
-            <PaperSheet text="No Events"/>
-            : this.state.events.map((event) =>{
-                
-                if( (this.state.filter === event.type || this.state.filter === '' || this.state.filter === 'All') 
-                    && 
-                    (this.state.locationFilter === event.location_slug || this.state.locationFilter === '' || this.state.locationFilter === 'All')
-                    &&
-                    (this.state.languageFilter === event.lang || this.state.languageFilter === '' || this.state.languageFilter === 'All')
-                ) return(
-                    <EventPaperSheet key={event.id} event={event}/>
-                );
-        });
         
         return(
             <div style={{flexGrow:1}}>
@@ -177,9 +141,9 @@ class Dashboard extends Flux.View {
                     <Typography component="h1" variant="display1" color="inherit" className={classes.heroText}>to discover our available courses, workshops and events.</Typography>
                     
                 </div>
-                <Grid container spacing={8} style={{justifyContent: 'center'}} >
+                <Grid container spacing={0} style={{justifyContent: 'center'}} >
                     <Grid item xs md={8} >
-                        <AppBar style={{padding:16, display: "flex", flexDirection: "row", flexWrap: "wrap", top: 54, zIndex: 10}} position="sticky" color="default">
+                        <AppBar style={{padding:16, display: "flex", flexDirection: "row", flexWrap: "wrap", zIndex: 10}} position="sticky" color="default">
                             <div style={{display: "flex", flexWrap: "no-wrap", alignItems: "baseline"}}>
                                 <Typography component="h1" variant="headline" style={{fontSize:"1rem"}}>
                                     Showing 
@@ -198,6 +162,7 @@ class Dashboard extends Flux.View {
                                             <MenuItem value="All">
                                                 <em>All</em>
                                             </MenuItem>
+                                            <MenuItem value={'course'}>Course</MenuItem>
                                             <MenuItem value={'workshop'}>Workshop</MenuItem>
                                             <MenuItem value={'hackathon'}>Hackathon</MenuItem>
                                             <MenuItem value={'intro_to_coding'}>Intro to Coding</MenuItem>
@@ -227,13 +192,29 @@ class Dashboard extends Flux.View {
                                                 <em>All</em>
                                             </MenuItem>
                                             <MenuItem value={'en'}>English</MenuItem>
-                                            <MenuItem value={'es'}>Spanish</MenuItem>
+                                            <MenuItem value={'es'}>Español</MenuItem>
                                         </Select>
                                     </FormControl>
                                 </form>
                             </div>
                         </AppBar>
-                        {allEvents.find(element=> element) ? allEvents : <PaperSheet text="No Events"/> }
+                        {
+                            this.state.events.length < 1 ? 
+                                <PaperSheet text="No Events"/>
+                            : this.state.events.map((event, index) =>{
+                                if( (this.state.filter === event.type || this.state.filter === '' || this.state.filter === 'All') 
+                                    && 
+                                    (this.state.locationFilter === event.location_slug || this.state.locationFilter === '' || this.state.locationFilter === 'All')
+                                    &&
+                                    (this.state.languageFilter === event.lang || this.state.languageFilter === event.language || this.state.languageFilter === '' || this.state.languageFilter === 'All')
+                                    &&
+                                    (!event.finished)
+                                ) return(
+                                    <EventPaperSheet key={index} event={event}/>
+                                );
+                            })
+                        }
+                        
                     </Grid>
                 </Grid>
             </div>

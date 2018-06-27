@@ -9,15 +9,17 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import Chip from '@material-ui/core/Chip';
 import CustomChip from './CustomChip.jsx';
+import Flag from "react-flags";
+import DirectionsIcon from '@material-ui/icons/LocationOn';
+import FancyButton from './FancyButton.jsx';
 
 const styles = theme => ({
   root: theme.mixins.gutters({
-    paddingLeft: theme.spacing.unit*3,
-    paddingRight: theme.spacing.unit*3,
-    paddingTop: theme.spacing.unit*3,
-    paddingBottom: theme.spacing.unit*3,
+    paddingLeft: theme.spacing.unit*4,
+    paddingRight: theme.spacing.unit*4,
+    paddingTop: theme.spacing.unit*4,
+    paddingBottom: theme.spacing.unit*4,
     marginTop: theme.spacing.unit * 3
   }),
   root2: {
@@ -31,6 +33,11 @@ const styles = theme => ({
     overflow: "hidden",
     textOverflow: "ellipsis"
   },
+  inlineInfo: {
+    flex: '1 1 auto', 
+    margin: "10px 10px"
+    
+  },
   avatar: {
     margin: 10
   },
@@ -38,12 +45,10 @@ const styles = theme => ({
     width: 20,
     height: 20
   },
-  button: {
-    margin: theme.spacing.unit
-  },
   buttoners:{
     justifyContent: 'center',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    padding: theme.spacing.unit*3 +"px 0"
   },
   chip: {
     marginLeft: 0,
@@ -54,8 +59,25 @@ const styles = theme => ({
     backgroundColor: theme.palette.primary.contrastText
   },
   clickable: {
-    marginBottom:5,
+    margin:5,
     boxShadow: "0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12)"
+  },
+  cornerFlag: {
+    position: "relative",  
+    top: -28, 
+    left: -26,
+    border: "1px solid transparent",
+    borderBottomRightRadius: 15,
+    width: 20,
+    height: 20,
+    overflow: "hidden"
+  },
+  infoBox: {
+    marginRight:24
+  },
+  soon: {
+    color: theme.palette.secondary.main,
+    fontWeight: "bold"
   }
 });
 
@@ -69,67 +91,128 @@ class EventPaperSheet extends React.Component {
         let now = moment();
         event_date = moment(event_date).isValid() ? moment(event_date) : now;
         let final = event_date.diff(now, 'days');
-        return final > 0 && final < 20 ? final+" days left" : "";
+        //return final > 0 && final < 20 ? final+" days left" : "";
+        return final > 0 && final < 20 ? "soon" : "";
         
     }
     
     render(){
         const { classes } = this.props;
         const event = this.props.event;
+        const types = ["intro_to_coding","coding_weekend","workshop","hackathon","4geeks_night","other"];
         
         let eventDay, eventTime = eventDay = "TBA";
-        if( event.event_date !== null ){
-            eventDay = event.event_date.replace(/\s/g, 'T');
+        let aDate = event.event_date || event.kickoff_date || null; 
+        if( moment(aDate).isValid() ){
+            eventDay = aDate.replace(/\s/g, 'T');
             eventDay = eventDay.replace(/-/g, '').replace(/:/g, '');
             eventDay = moment(eventDay);
-            eventTime = eventDay.format("h:mm a").toString();
+            eventTime = eventDay.get("h") !== 0 ? eventDay.format("h:mm a").toString() : null;
             eventDay = eventDay.format("MMMM D YYYY").toString();
         }
         
+        const lang = event.lang || event.language || null;
+        const title = event.title || "New Cohort";
+        const description = event.description || "A Premium Program designed to launch your career as a developer. Learn the fundamentals of coding and build applications using HTML5, CSS3, React.js, and Python. Integrate your application(s) with other platforms and create your own API. This course offers a dedicated career support team as well as: one-on-one coaching with our Senior mentors; networking opportunities; and introductions to potential employers.";
+        const cta = types.indexOf(event.type) > -1 ? "RSVP" : "APPLY";
+        
         return ( 
-            <Paper elevation={4} className={classNames(classes.root, classes.root2)} style={{justifyContent: "space-between"}}>
-                
+            <Paper elevation={1} className={classNames(classes.root, classes.root2)} style={{justifyContent: "space-between"}}>
                 <div className={classes.fixItem}>
-                    <Typography variant="headline" component="h2" style={{display: "inline-block"}}>
-                        {event.title}
-                    </Typography>
-                    <br/>
-                    <div className={classes.root2} style={{alignItems: "center", justifyContent:"space-between"}} >
-                        <Typography variant="subheading" >
-                            <small>Date:</small> {eventDay} <sup><em><small className={classes.avatarChip}>{this.daysLeftCalc(eventDay)}</small></em></sup>
-                            <br/>
-                            <small>Time:</small> {eventTime}
+                    <Link to={"/event/"+event.id} >
+                        <Typography variant="title" component="h2" style={{display: "inline-block", textDecoration: "underline", fontWeight: "bold"}}>
+                            {title}
                         </Typography>
-                        <CustomChip
-                            classes={classes} 
-                            clickable={true}
-                            onClick={() => window.open("https://maps.google.com/maps?q="+event.address , "_blank")}
-                            icon={
-                                <Avatar
-                                    src={event.logo_url}
-                                />
-                            }
-                            label={event.address}
-                          />
-                    </div>
-                </div>
-                <div className={classNames(classes.root2, classes.buttoners)} style={{flex: '1 1 auto'}}>
-                    <Typography style={{padding:20}}>
-                        {
-                          event.description && event.description.substring(0, event.description.indexOf('.',80)+1)
-                          
-                        }
-                    </Typography>
-                    <a href={event.url} style={{textDecoration: 'none'}}>
-                        <Button variant="raised" color="primary" className={classes.button}>
-                          RSVP
-                        </Button>
-                    </a>
-                    <Link to={"/event/"+event.id} style={{textDecoration: 'none'}}>
-                        <Button variant="flat" color="secondary" className={classes.button}>
-                          Read More
-                        </Button>
                     </Link>
+                    <br/>
+                    <div style={{display: "flex", flexWrap:"wrap"}}>
+                        <div style={{flex: "1 1 500px"}}>
+                            <Typography variant="body1" style={{padding:"10px 0", lineHeight:"1.6rem"}}>
+                                {
+                                  description && description.substring(0, description.indexOf('.',400)+1)
+                                }
+                            </Typography>
+                            {
+                              event.banner_url ?
+                                  <FancyButton 
+                                    image={event.banner_url} 
+                                    address={event.address} 
+                                    onClick={() => window.open(event.type === 'course' ? "https://www.4geeksacademy.co/course/"+event.slug:"https://maps.google.com/maps?q="+event.address , "_blank")}
+                                  />
+                              :
+                              event.address &&
+                                  <div className={classes.inlineInfo}>
+                                      <Typography variant="caption">Where:</Typography>
+                                      <CustomChip
+                                          classes={classes} 
+                                          clickable={true}
+                                          onClick={() => window.open("https://maps.google.com/maps?q="+event.address , "_blank")}
+                                          icon={
+                                              <Avatar
+                                                  src={event.logo_url}
+                                              />
+                                          }
+                                          label={event.address.substring(0, event.address.indexOf(',', event.address.indexOf(',')+1))}
+                                        />
+                                  </div>
+                            }
+                        </div>
+                        <div style={{flex: "1 1 80px"}}>
+                            <div className={classes.inlineInfo}>
+                                <Typography variant="caption">Date:</Typography>
+                                <Typography style={{display:"inline"}} className={classes[this.daysLeftCalc(eventDay)]}>{eventDay}</Typography> 
+                            </div>
+                            { eventTime ?
+                                <div className={classes.inlineInfo}>
+                                    <Typography variant="caption">Time:</Typography> <Typography>{eventTime}</Typography>
+                                </div>
+                            :
+                                <div className={classes.inlineInfo}>
+                                    <Typography variant="caption">Duration:</Typography> <Typography>{event.hr_duration} hours ({event.week_duration} weeks)</Typography>
+                                </div>
+                            }
+                            {event.location_slug &&
+                            <div className={classes.inlineInfo}>
+                                <Typography variant="caption">Location:</Typography>
+                                <CustomChip
+                                    classes={classes} 
+                                    clickable={true}
+                                    onClick={() => window.open("https://www.4geeksacademy.co/location/"+event.location_slug , "_blank")}
+                                    icon={<DirectionsIcon />}
+                                    label={event.location_slug.replace(/-/g, ' ')}
+                                  />
+                            </div>
+                            }
+                            {lang &&
+                            <div className={classes.inlineInfo}>
+                                <Typography variant="caption">Language:</Typography>
+                                <Flag
+                                  name={lang === 'en' ? "US" : lang.toUpperCase()}
+                                  format="png"
+                                  pngSize={24}
+                                  alt="USA Flag"
+                                  basePath="./img/flags"
+                                />
+                            </div>
+                                
+                            }
+                        </div>
+                    </div>
+                     
+                    <div className={classNames(classes.root2, classes.buttoners)}>
+                        
+                        <a href={event.url} style={{textDecoration: 'none'}}>
+                            <Button size="large" variant={cta === "APPLY" ? "raised" : "outlined"} color="secondary" className={classNames(classes.button, classes[cta])}>
+                                {cta}
+                            </Button>
+                        </a>
+                        <Link to={"/event/"+event.id} style={{textDecoration: 'none'}}>
+                            <Button size="large" variant="flat" color="secondary" className={classes.button}>
+                              Read More
+                            </Button>
+                        </Link>
+                        
+                    </div>
                 </div>
             </Paper>
       );

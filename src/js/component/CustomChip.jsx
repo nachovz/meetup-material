@@ -7,37 +7,27 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 function CustomChip(props){
     
-    return  props.tooltipTitle ? (
-        <Tooltip id="tooltip-icon" title={props.tooltipTitle}>
-            <Chip
-                avatar={
-                    <Avatar
-                        className={props.classes.chipAvatar}
-                    >
-                        {props.icon}
-                    </Avatar>
-                }
-                label={props.label}
-                className={classNames(props.classes.margin, props.classes.chip, (props.clickable ? props.classes.clickable: '') )}
-                onClick={props.onClick}
-                clickable={props.clickable}
-            /> 
-        </Tooltip>
-        ) : (
-            <Chip
-                avatar={
-                    <Avatar
-                        className={props.classes.chipAvatar}
-                    >
-                        {props.icon}
-                    </Avatar>
-                }
-                label={props.label}
-                className={classNames(props.classes.margin, props.classes.chip, (props.clickable ? props.classes.clickable: '') )}
-                onClick={props.onClick}
-                clickable={props.clickable}
-            /> 
+    var chip = (
+        
+        <Chip
+            avatar={
+                <Avatar
+                    className={props.classes.chipAvatar}
+                >
+                    {props.icon}
+                </Avatar>
+            }
+            label={props.label.replace(/_/g, " ")}
+            className={classNames(props.classes.margin, props.classes.chip, (props.clickable ? props.classes.clickable: '') )}
+            onClick={props.onClick}
+            clickable={props.clickable}
+        />
         );
+    
+    if(props.tooltipTitle) return (<Tooltip id="tooltip-icon" title={props.tooltipTitle}>{chip}</Tooltip>);
+    
+    return chip;
+    
 }
 CustomChip.propTypes = {
   classes: PropTypes.object,

@@ -37,7 +37,11 @@ const styles = theme => ({
     maxWidth: 1000,
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginBottom: 100
+    marginBottom: 100,
+    marginTop: theme.spacing.unit*2
+  },
+  cardHeader: {
+      paddingBottom:0
   },
   media: {
     height: 0,
@@ -79,11 +83,14 @@ const styles = theme => ({
   },
   chip: {
     marginLeft: 0,
-    color: theme.palette.primary.contrastText,
-    backgroundColor: theme.palette.secondary.dark
+    color: theme.palette.primary.light,
+    backgroundColor: theme.palette.primary.contrastText,
+    border: "1px solid "+theme.palette.primary.light
   },
   chipAvatar: {
-    backgroundColor: theme.palette.primary.contrastText
+    backgroundColor: theme.palette.primary.contrastText,
+    height:30,
+    width:30
   },
   clickable: {
     boxShadow: "0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12)"
@@ -161,6 +168,7 @@ class Event extends Flux.View {
                 }
                 title={event.title}
                 subheader={eventDay+" "+eventTime}
+                className={classes.cardHeader}
                 />
                 <CardContent>
                     <div className={classes.badgesContainer}>
@@ -215,9 +223,6 @@ class Event extends Flux.View {
                     </Typography>
                 </CardContent>
                 <CardActions className={classes.actions} disableActionSpacing>
-                    <IconButton aria-label="Add to favorites">
-                        <FavoriteIcon />
-                    </IconButton>
                     <IconButton aria-label="Share">
                         <ShareIcon />
                     </IconButton>
@@ -225,7 +230,7 @@ class Event extends Flux.View {
                 </CardActions>
                 <Button 
                     variant="fab" 
-                    color="primary" 
+                    color="secondary" 
                     className={classNames(classes.button, classes.fab)} 
                     onClick={() => window.open(event.url,"_blank")}>
                     <Tooltip open={true} title="RSVP ➤" placement="left">

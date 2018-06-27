@@ -4,26 +4,10 @@ import PropTypes from "prop-types";
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import Button from '@material-ui/core/Button';
-import Avatar from '@material-ui/core/Avatar';
 
-import {UserContext} from '../component/user-context';
-
-import Login from './Login.jsx';
-
-const styles = {
+const styles = theme => ({
   root: {
-    flexGrow: 1,
-    marginBottom: 45
+    flexGrow: 1
   },
   flex: {
     flex: 1
@@ -33,10 +17,10 @@ const styles = {
     marginRight: 20
   },
   text: {
-    color: "white",
+    color: theme.palette.primary.light,
     textDecoration: "none"
   }
-};
+});
 
 class Navbar extends React.Component{
     
@@ -67,15 +51,10 @@ class Navbar extends React.Component{
     
     render(){
         const { classes } = this.props;
-        const { auth, anchorEl } = this.state;
-        const open = Boolean(anchorEl);
-        const loginEnabled = this.props.loginEnabled || false;
-            
-        let homeActive = this.props.currentView === "home" ? "active" :"";
         
         return(
             <div className={classes.root}>
-                <AppBar position="fixed" className={classes.navBar} >
+                <AppBar position="static" className={classes.navBar} >
                     <Toolbar>
                         <Link className={classes.text} to={"/"}>
                             <img
@@ -84,45 +63,6 @@ class Navbar extends React.Component{
                             />
                         </Link>
                         
-                        {loginEnabled && (
-                            auth ? (
-                                <div>
-                                    <IconButton
-                                      aria-owns={open ? 'menu-appbar' : null}
-                                      aria-haspopup="true"
-                                      onClick={this.handleMenu}
-                                      color="inherit"
-                                    >
-                                        <AccountCircle />
-                                    </IconButton>
-                                    <Menu
-                                      id="menu-appbar"
-                                      anchorEl={anchorEl}
-                                      anchorOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'right'
-                                      }}
-                                      transformOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'right'
-                                      }}
-                                      open={open}
-                                      onClose={this.handleClose}
-                                    >
-                                        <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                                        <MenuItem onClick={this.handleClose}>My account</MenuItem>
-                                    </Menu>
-                                </div>
-                            ) : (
-                                <div>
-                                    <UserContext.Consumer>
-                                        { (user) => (
-                                            <Login sessionData={user} />
-                                        ) }
-                                    </UserContext.Consumer>
-                                </div>
-                            )
-                        )}
                     </Toolbar>
                 </AppBar>
             </div>

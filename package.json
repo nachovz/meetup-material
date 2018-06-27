@@ -62,6 +62,7 @@
     "react-ace": "^5.9.0",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.4.0",
+    "react-flags": "^0.1.13",
     "react-flux-dash": "^1.1.6",
     "react-ga": "^2.5.0",
     "react-polyfills": "0.0.1",
