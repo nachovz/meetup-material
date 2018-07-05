@@ -34,6 +34,7 @@ class MeetupActions extends Flux.Action{
               if (!Array.isArray(data)) {
                 throw new Error(data);//TO-DO: Documentation on error cases
               }
+              
               this.dispatch('MeetupStore.loadDataCourses', data);  
           }).catch(error => {
             this.dispatch('MeetupStore.error', error);

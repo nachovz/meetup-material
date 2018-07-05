@@ -384,7 +384,9 @@ class MeetupStore extends Flux.Store{
     
     _loadDataEvents(data){
         let tempState = this.state;
-        tempState.events = data;
+        tempState.events = data.map( (event) => {
+           event["time"] = Moment(event.event_date); 
+        });
         this.setStoreState(tempState).emit();
     }
     
@@ -414,7 +416,10 @@ class MeetupStore extends Flux.Store{
     }
     
     getAllEvents(){
-        return this.state.events.concat(this.state.courses);
+        let filteredEvents = this.state.events.map( event => {
+            event["time"] = Moment(event.event_date).unix();
+        });
+        return this.state.events.concat(this.state.courses).sort((a, b) => a.time - b.time);
     }
     
     getEvent(incomingId){

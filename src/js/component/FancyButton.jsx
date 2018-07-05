@@ -105,7 +105,7 @@ function FancyButton(props) {
                       className={classes.imageTitle}
                       onClick={props.onClick}
                     >
-                        {props.address}
+                        {props.text}
                         <span className={classes.imageMarked} />
                     </Typography>
                 </span>
@@ -117,7 +117,7 @@ function FancyButton(props) {
 FancyButton.propTypes = {
   classes: PropTypes.object.isRequired,
   image: PropTypes.string.isRequired,
-  address: PropTypes.string,
+  text: PropTypes.string,
   onClick: PropTypes.func
 };
 

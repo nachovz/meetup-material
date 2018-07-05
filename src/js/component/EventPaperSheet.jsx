@@ -46,7 +46,7 @@ const styles = theme => ({
     height: 20
   },
   buttoners:{
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     alignSelf: 'center',
     padding: theme.spacing.unit*3 +"px 0"
   },
@@ -136,7 +136,7 @@ class EventPaperSheet extends React.Component {
                               event.banner_url ?
                                   <FancyButton 
                                     image={event.banner_url} 
-                                    address={event.address} 
+                                    text={event.address} 
                                     onClick={() => window.open(event.type === 'course' ? "https://www.4geeksacademy.co/course/"+event.slug:"https://maps.google.com/maps?q="+event.address , "_blank")}
                                   />
                               :
