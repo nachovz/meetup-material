@@ -1,24 +1,19 @@
 import React from "react";
 import Flux from "@4geeksacademy/react-flux-dash";
-import { Link } from "react-router-dom";
 import { withStyles } from '@material-ui/core/styles';
-import 'react-infinite-calendar/styles.css';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import AppBar from '@material-ui/core/AppBar';
 
 import ReactGA from 'react-ga';
-import Navbar from '../component/Navbar.jsx';
 import PaperSheet from '../component/PaperSheet.jsx';
 import EventPaperSheet from '../component/EventPaperSheet.jsx';
-//import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
 import meetupStore from '../stores/MeetupStore.jsx';
-import meetupActions from '../actions/MeetupActions.jsx';
 
 const styles = theme => ({
   root: theme.mixins.gutters({
@@ -80,7 +75,6 @@ class Dashboard extends Flux.View {
         
         this.state = {
             events: meetupStore.getAllEvents(),
-            session: meetupStore.getSession(),
             locations: meetupStore.getLocations(),
             filter: 'All',
             locationFilter: 'All',
@@ -111,8 +105,7 @@ class Dashboard extends Flux.View {
         
         return(
             <div style={{flexGrow:1}}>
-                <Navbar currentView="home" />
-                <div className={classes.heroUnit}>
+                <div className={classes.heroUnit} id="heroUnit-main">
                     <Typography component="h1" variant="display1" color="inherit" className={classes.heroText}>Select a location:  </Typography>
                     <form autoComplete="off">
                         <FormControl className={classes.inlineForm}>
@@ -143,7 +136,7 @@ class Dashboard extends Flux.View {
                 </div>
                 <Grid container spacing={0} style={{justifyContent: 'center'}} >
                     <Grid item xs md={8} >
-                        <AppBar style={{padding:16, display: "flex", flexDirection: "row", flexWrap: "wrap", zIndex: 10}} position="sticky" color="default">
+                        <AppBar style={{padding:"16px 0 0 0", display: "flex", flexDirection: "row", flexWrap: "wrap", zIndex: 10, justifyContent: "center"}} position="sticky" color="default">
                             <div style={{display: "flex", flexWrap: "no-wrap", alignItems: "baseline"}}>
                                 <Typography component="h1" variant="headline" style={{fontSize:"1rem"}}>
                                     Showing 

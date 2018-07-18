@@ -5,7 +5,8 @@ module.exports = {
   entry: ['./src/js/index.js'], 
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'public')
+    path: path.resolve(__dirname, 'public'),
+    publicPath: path.resolve(__dirname, '/')
   },
   module: {
     rules: [
@@ -63,7 +64,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.ProvidePlugin({
       $: 'jquery',
-      Popper: 'popper.js',
+      Popper: 'popper.js/dist/umd/popper',
       jQuery: 'jquery',
       // In case you imported plugins individually, you must also require them here:
       Util: "exports-loader?Util!bootstrap/js/dist/util",

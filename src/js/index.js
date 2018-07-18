@@ -3,11 +3,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactGA from 'react-ga';
 ReactGA.initialize('UA-41629310-5');
+//import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-
-//const UserContext = React.createContext('anonymous');
 
 const theme = createMuiTheme({
   palette: {
@@ -25,10 +24,13 @@ const theme = createMuiTheme({
     }
   }
 });
+
 //include jquery into the bundle and store its contents into the $ variable
 //import $ from "jquery";
+//import 'popper.js';
 //include bootstrap npm library into the bundle
-//import 'bootstrap';
+import 'bootstrap';
+import 'bootstrap-material-design/dist/css/bootstrap-material-design.min.css';
 
 //include your index.scss file into the bundle
 import '../styles/index.scss';

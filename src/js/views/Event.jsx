@@ -3,23 +3,17 @@ import Flux from "@4geeksacademy/react-flux-dash";
 import Moment from "moment";
 import ReactGA from 'react-ga';
 import classNames from 'classnames';
-
 import { withStyles } from '@material-ui/core/styles';
-import classnames from 'classnames';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import GroupIcon from '@material-ui/icons/Group';
 import ShareIcon from '@material-ui/icons/Share';
 import LocationCityIcon from '@material-ui/icons/LocationCity';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import DirectionsIcon from '@material-ui/icons/Directions';
 import LabelIcon from '@material-ui/icons/Label';
 import CheckIcon from '@material-ui/icons/Check';
@@ -29,7 +23,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CustomChip from '../component/CustomChip.jsx';
 
-import Navbar from '../component/Navbar.jsx';
 import meetupStore from '../stores/MeetupStore.jsx';
 
 const styles = theme => ({
@@ -156,7 +149,6 @@ class Event extends Flux.View {
 
     return (
         <React.Fragment>
-            <Navbar sessionData={this.state.session} />
             <Card className={classes.card}>
                 <CardHeader
                 avatar={

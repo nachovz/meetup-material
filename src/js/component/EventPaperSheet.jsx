@@ -36,7 +36,6 @@ const styles = theme => ({
   inlineInfo: {
     flex: '1 1 auto', 
     margin: "10px 10px"
-    
   },
   avatar: {
     margin: 10
@@ -48,7 +47,7 @@ const styles = theme => ({
   buttoners:{
     justifyContent: 'space-evenly',
     alignSelf: 'center',
-    padding: theme.spacing.unit*3 +"px 0"
+    padding: theme.spacing.unit*3+"px 0 0"
   },
   chip: {
     marginLeft: 0,
@@ -61,19 +60,6 @@ const styles = theme => ({
   clickable: {
     margin:5,
     boxShadow: "0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12)"
-  },
-  cornerFlag: {
-    position: "relative",  
-    top: -28, 
-    left: -26,
-    border: "1px solid transparent",
-    borderBottomRightRadius: 15,
-    width: 20,
-    height: 20,
-    overflow: "hidden"
-  },
-  infoBox: {
-    marginRight:24
   },
   soon: {
     color: theme.palette.secondary.main,
@@ -93,7 +79,11 @@ class EventPaperSheet extends React.Component {
         let final = event_date.diff(now, 'days');
         //return final > 0 && final < 20 ? final+" days left" : "";
         return final > 0 && final < 20 ? "soon" : "";
-        
+    }
+    
+    stripHTML(html){
+      var doc = new DOMParser().parseFromString(html, 'text/html');
+      return doc.body.textContent || "";
     }
     
     render(){
@@ -113,23 +103,28 @@ class EventPaperSheet extends React.Component {
         
         const lang = event.lang || event.language || null;
         const title = event.title || "New Cohort";
-        const description = event.description || "A Premium Program designed to launch your career as a developer. Learn the fundamentals of coding and build applications using HTML5, CSS3, React.js, and Python. Integrate your application(s) with other platforms and create your own API. This course offers a dedicated career support team as well as: one-on-one coaching with our Senior mentors; networking opportunities; and introductions to potential employers.";
+        const description = this.stripHTML(event.description);//|| "A Premium Program designed to launch your career as a developer. Learn the fundamentals of coding and build applications using HTML5, CSS3, React.js, and Python. Integrate your application(s) with other platforms and create your own API. This course offers a dedicated career support team as well as: one-on-one coaching with our Senior mentors; networking opportunities; and introductions to potential employers.";
         const cta = types.indexOf(event.type) > -1 ? "RSVP" : "APPLY";
+        
+        const titleComp = (
+            <Typography variant="title" component="h2" style={{display: "inline-block", textDecoration: "underline", fontWeight: "bold"}}>
+                {title}
+            </Typography>);
         
         return ( 
             <Paper elevation={1} className={classNames(classes.root, classes.root2)} style={{justifyContent: "space-between"}}>
                 <div className={classes.fixItem}>
-                    <Link to={"/event/"+event.id} >
-                        <Typography variant="title" component="h2" style={{display: "inline-block", textDecoration: "underline", fontWeight: "bold"}}>
-                            {title}
-                        </Typography>
-                    </Link>
+                    { event.type !== 'course' ? 
+                        (<Link to={"/event/"+event.id}> {titleComp}</Link>) 
+                        :
+                        (<a href={"https://www.4geeksacademy.co/course/"+event.slug}> {titleComp} </a>)
+                    }
                     <br/>
                     <div style={{display: "flex", flexWrap:"wrap"}}>
                         <div style={{flex: "1 1 500px"}}>
                             <Typography variant="body1" style={{padding:"10px 0", lineHeight:"1.6rem"}}>
                                 {
-                                  description && description.substring(0, description.indexOf('.',400)+1)
+                                  description && description.substring(0, description.indexOf('.',200)+1)
                                 }
                             </Typography>
                             {
@@ -198,11 +193,9 @@ class EventPaperSheet extends React.Component {
                             }
                         </div>
                     </div>
-                     
                     <div className={classNames(classes.root2, classes.buttoners)}>
-                        
                         <a href={event.url} style={{textDecoration: 'none'}}>
-                            <Button size="large" variant={cta === "APPLY" ? "raised" : "outlined"} color="secondary" className={classNames(classes.button, classes[cta])}>
+                            <Button size="large" variant={"raised"} color="secondary" className={classNames(classes.button, classes[cta])}>
                                 {cta}
                             </Button>
                         </a>
@@ -211,7 +204,6 @@ class EventPaperSheet extends React.Component {
                               Read More
                             </Button>
                         </Link>
-                        
                     </div>
                 </div>
             </Paper>
