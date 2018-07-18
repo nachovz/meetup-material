@@ -1,6 +1,5 @@
 import React from 'react';
 import Flux from "@4geeksacademy/react-flux-dash";
-import require from 'require-ensure';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./views/ScrollToTop.jsx";
 import Dashboard from "./views/Dashboard.jsx";
