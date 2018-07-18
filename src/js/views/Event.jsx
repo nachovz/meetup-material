@@ -22,6 +22,7 @@ import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CustomChip from '../component/CustomChip.jsx';
+import ReactHtmlParser from 'react-html-parser';
 
 import meetupStore from '../stores/MeetupStore.jsx';
 
@@ -140,12 +141,6 @@ class Event extends Flux.View {
             eventTime = eventDay.format("h:mm a").toString();
             eventDay = eventDay.format("MMMM D").toString();
         }
-        
-        let descSummary, descRest = descSummary = "";
-        if( event.description ){
-            descSummary = event.description.substring(0, event.description.indexOf('.',80)+1);
-            descRest = event.description.substring(event.description.indexOf('.',80)+1);
-        }
 
     return (
         <React.Fragment>
@@ -154,7 +149,7 @@ class Event extends Flux.View {
                 avatar={
                     <Avatar
                         aria-label="Recipe"
-                        src={event.logo_url}
+                        src={event.logo_url || "https://pbs.twimg.com/profile_images/930433054371434496/v8GNrusZ_400x400.jpg"}
                         className={classNames(classes.avatar, classes.bigAvatar)}
                     />
                 }
@@ -211,7 +206,7 @@ class Event extends Flux.View {
                         }
                     </div>
                     <Typography component="p">
-                        {descSummary}{descRest}
+                        {ReactHtmlParser(event.description)}
                     </Typography>
                 </CardContent>
                 <CardActions className={classes.actions} disableActionSpacing>

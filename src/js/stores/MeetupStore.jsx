@@ -473,11 +473,10 @@ class MeetupStore extends Flux.Store{
     }
     
     _loadDataEvents(data){
-        let tempState = this.state;
-        tempState.events = data.map( (event) => {
-           event["time"] = Moment(event.event_date); 
-        });
-        this.setStoreState(tempState).emit();
+        //let tempState = this.state;
+        //tempState.events = data;
+        data = data.filter( event => Moment(event.event_date).diff( Moment(), "d" ) > 0 );
+        this.setStoreState({events: data}).emit();
     }
     
     _loadDataCourses(data){
@@ -487,7 +486,7 @@ class MeetupStore extends Flux.Store{
             
             course["type"] = "course";
             course["finished"] = true;
-            let event_date = Moment(course.date).isValid() ? Moment(course.date) : now;
+            let event_date = Moment(course.date, "MMMM D, YYYY").isValid() ? Moment(course.date,"MMMM D, YYYY") : now;
             if( event_date.diff(now, 'days') >= 0 ){
                 course["finished"] = false;
             }
@@ -506,10 +505,7 @@ class MeetupStore extends Flux.Store{
     }
     
     getAllEvents(){
-        let filteredEvents = this.state.events.map( event => {
-            event["time"] = Moment(event.event_date).unix();
-        });
-        return this.state.events.concat(this.state.courses).sort((a, b) => a.time - b.time);
+        return this.state.events.filter( event => Moment(event.event_date).diff( Moment(), "d" ) > 0 ).concat(this.state.courses).sort((a, b) => Moment(a.event_date).unix() - Moment(b.event_date).unix());
     }
     
     getEvent(incomingId){

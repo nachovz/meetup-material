@@ -20,7 +20,7 @@ function CustomChip(props){
             label={props.label.replace(/_/g, " ")}
             className={classNames(props.classes.margin, props.classes.chip, (props.clickable ? props.classes.clickable: '') )}
             onClick={props.onClick}
-            clickable={props.clickable}
+            //clickable={props.clickable}
         />
         );
     

@@ -73,14 +73,6 @@ class EventPaperSheet extends React.Component {
         super(props);
     }
     
-    daysLeftCalc(event_date){
-        let now = moment();
-        event_date = moment(event_date).isValid() ? moment(event_date) : now;
-        let final = event_date.diff(now, 'days');
-        //return final > 0 && final < 20 ? final+" days left" : "";
-        return final > 0 && final < 20 ? "soon" : "";
-    }
-    
     stripHTML(html){
       var doc = new DOMParser().parseFromString(html, 'text/html');
       return doc.body.textContent || "";
@@ -93,10 +85,12 @@ class EventPaperSheet extends React.Component {
         
         let eventDay, eventTime = eventDay = "TBA";
         let aDate = event.event_date || event.kickoff_date || null; 
+        let soon = "";
         if( moment(aDate).isValid() ){
             eventDay = aDate.replace(/\s/g, 'T');
             eventDay = eventDay.replace(/-/g, '').replace(/:/g, '');
             eventDay = moment(eventDay);
+            soon = eventDay.diff(moment(), 'days') < 20 && "soon";
             eventTime = eventDay.get("h") !== 0 ? eventDay.format("h:mm a").toString() : null;
             eventDay = eventDay.format("MMMM D YYYY").toString();
         }
@@ -155,7 +149,7 @@ class EventPaperSheet extends React.Component {
                         <div style={{flex: "1 1 80px"}}>
                             <div className={classes.inlineInfo}>
                                 <Typography variant="caption">Date:</Typography>
-                                <Typography style={{display:"inline"}} className={classes[this.daysLeftCalc(eventDay)]}>{eventDay}</Typography> 
+                                <Typography style={{display:"inline"}} className={classes[soon]}>{eventDay}</Typography> 
                             </div>
                             { eventTime ?
                                 <div className={classes.inlineInfo}>
