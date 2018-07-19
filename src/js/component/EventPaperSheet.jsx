@@ -68,11 +68,7 @@ const styles = theme => ({
 });
 
 class EventPaperSheet extends React.Component {
-    
-    constructor(props){
-        super(props);
-    }
-    
+
     stripHTML(html){
       var doc = new DOMParser().parseFromString(html, 'text/html');
       return doc.body.textContent || "";
@@ -101,7 +97,7 @@ class EventPaperSheet extends React.Component {
         const cta = types.indexOf(event.type) > -1 ? "RSVP" : "APPLY";
         
         const titleComp = (
-            <Typography variant="title" component="h2" style={{display: "inline-block", textDecoration: "underline", fontWeight: "bold"}}>
+            <Typography variant="title" component="h2" style={{display: "inline-block", textDecoration: "underline", fontSize: "1.6rem", lineHeight: "1.4em"}}>
                 {title}
             </Typography>);
         

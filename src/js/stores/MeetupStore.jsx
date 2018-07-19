@@ -8,253 +8,252 @@ class MeetupStore extends Flux.Store{
         
         this.state = {
             "events":[
-                              {
-                                "description": "<p>An event for all the blockchain developers to meet</p>",
-                                "title": "Blockchain coders gather up ",
-                                "url": "http://hola.com",
-                                "capacity": "100",
-                                "event_date": "2018-09-15 02:00:00",
-                                "type": "other",
-                                "address": "66 W Flagler St #900, Miami, FL 33130",
-                                "location_slug": "downtown-miami",
-                                "lang": "en",
-                                "city_slug": "miami",
-                                "banner_url": "http://hola.com",
-                                "invite_only": "false",
-                                "created_at": "2018-07-14 13:03:49",
-                                "id": "5",
-                                "status": "draft",
-                                "logo_url": null
-                              },
-                              {
-                                "description": "<p>1 hora y 40 de duracion</p><p>25 $</p>",
-                                "title": "Use case: coding a dApp to certify documents on the Ethereum BLockchain ",
-                                "url": "http://hola.com",
-                                "capacity": "100",
-                                "event_date": "2018-09-01 12:00:00",
-                                "type": "workshop",
-                                "address": "66 W Flagler St #900, Miami, FL 33130",
-                                "location_slug": "downtown-miami",
-                                "lang": "en",
-                                "city_slug": "miami",
-                                "banner_url": "http://hola.com",
-                                "invite_only": "false",
-                                "created_at": "2018-07-14 12:54:01",
-                                "id": "4",
-                                "status": "draft",
-                                "logo_url": null
-                              },
-                              {
-                                "description": "<p>25$</p><p>1 hora y 40</p>",
-                                "title": "Coding your first dApp in the Blockchain using Ethereum ",
-                                "url": "http://hola.com",
-                                "capacity": "100",
-                                "event_date": "2018-08-04 02:00:00",
-                                "type": "workshop",
-                                "address": "66 W Flagler St #900, Miami, FL 33130",
-                                "location_slug": "downtown-miami",
-                                "lang": "en",
-                                "city_slug": "miami",
-                                "banner_url": "http://hola.com",
-                                "invite_only": "false",
-                                "created_at": "2018-07-14 12:47:06",
-                                "id": "3",
-                                "status": "draft",
-                                "logo_url": null
-                              },
-                              {
-                                "description": "<h2>4Geeks Nights - Learn to Code for Free</h2><p>Coding is no longer a dream. We are closing the gap and bringing coding to your life. A master platform, full of exercises and content, for free.</p><p>To begin, we will give you free access to our Coding Introduction Program, where you will find everything you need to start your training as a software developer. HTML, CSS, Bootstrap, JavaScript and more. This is not only reading, videos, and tutorials, but tons of exercises and projects to work with.</p><p><br></p><p>We have&nbsp;at least five&nbsp;GREAT reasons why you should&nbsp;attend&nbsp;our 4Geeks Nights event on June&nbsp;28th:</p><p><br></p><p>- You will&nbsp;have&nbsp;FREE access to the Coding Intro Program and platform.&nbsp;Learning&nbsp;to Code has never been easy and&nbsp;better.</p><p><br></p><p>- You will&nbsp;receive&nbsp;free mentorship hours every&nbsp;week.</p><p><br></p><p>- Our Career Support program speaks for&nbsp;itself…You&nbsp;will meetsome of&nbsp;our&nbsp;Alumni and hear about their personal projects and overall experience&nbsp;at 4Geeks!</p><p><br></p><p>- You will have fun while meeting our entire team &amp; office: Founders, instructors, partners and classroom spaces. Have a drink with us!</p><p><br></p><p>- You will get the details about our Software Program. Full Stack + Part-time + Premium Education + Best pricing&nbsp;options.</p><p><br></p><p>- Play Kill the Bug and earn a prize!</p><p><br></p><p>We are launching new programs every two months&nbsp;and you canbecome part of our&nbsp;next 4Geeks Alumni as a Full-Stack Software Developer. Get ready to change your&nbsp;life!</p><p><br></p><p>Come. Have fun. Learn to Code. Let's celebrate together our way of making Coding a possibility&nbsp;to your current or new career.</p><p><br></p><p>A little bit about our program:</p><p><br></p><p>Become a software developer in 16 weeks, with a part-time/blended methodology and with pricing options starting at$140/mo.&nbsp;You will get&nbsp;over&nbsp;320 hours of&nbsp;training in&nbsp;a gamified program designed to be 100% hands-on.</p><p><br></p><p>Our Syllabus is based on&nbsp;JavaScript, React JS, Python, Django, Mongo DB, AJAX, API,&nbsp;and&nbsp;other exciting technologies. You will be trained in the most&nbsp;desired&nbsp;technologies in&nbsp;Miami in exactlywhat companies are looking for!</p><p><br></p><p>NOTE: Our programs&nbsp;have a maximum capacity of 14&nbsp;students, so there are only a few spots availableper cohort. Just click here if you want to meet with us.&nbsp;The next program&nbsp;will start&nbsp;on August 13th.&nbsp;This is your chance to understand how Coding will change your professional life!</p>",
-                                "title": "4Geeks Nights: INFO+CODING+GAMES+DRINKS",
-                                "url": "https://www.eventbrite.com/e/4geeks-nights-infocodinggamesdrinks-tickets-47588520546",
-                                "capacity": "100",
-                                "event_date": "2018-07-28 06:00:00",
-                                "type": "4geeks_night",
-                                "address": "66 West Flagler Street  #900",
-                                "location_slug": "downtown-miami",
-                                "lang": "en",
-                                "city_slug": "miami",
-                                "banner_url": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F46680560%2F154764716258%2F1%2Foriginal.jpg?rect=0%2C60%2C960%2C480&auto=compress&w=2000&s=af8051ba98cddee95edbcd4ec904f334",
-                                "invite_only": "false",
-                                "created_at": "2018-06-29 10:31:56",
-                                "id": "2",
-                                "status": "published",
-                                "logo_url": null
-                              },
-                              {
-                                "description": "4Geeks Nights - Learn to Code for Free Coding is no longer a dream. We are closing the gap and bringing coding to your life. A master platform, full of exercises and content, for free. To begin, we will give you free access to our Coding Introduction Program, where you will find everything you need to start your training as a software developer. HTML, CSS, Bootstrap, JavaScript and more. This is not only reading, videos, and tutorials, but tons of exercises and projects to work with.We have five -probably more- GREAT reasons why you should be in our 4Geeks Nights event on June 28th.- You will get FREE access to the Coding Intro Program and platform. Learn to Code has never been easy and better;- You will get free mentorship hours every week;- Our Career Support program speaks for itself. You will meet our Alumni; one of them will talk about his projects and experience at 4Geeks!- You will have fun while meeting our entire team & office: Founders, instructors, partners and classroom spaces. Have a drink with us!- You will get the details about our Software Program.  Full Stack + Part-time + Premium Education + Best pricing options'- Play Kill the Bug and earn a prize!Every 2 months we are launching new programs and you can be part of the next 4Geeks Alumni as a Full-Stack Software Developer. Get ready to change your life.Come. Have fun. Learn to Code. Let's celebrate together our way of making Coding a possibility to your career.A little bit about our program:Become a software developer in 16 weeks, with a part-time/blended methodology and with pricing options starting at $140p/mo. You will get more than 320 hours of training, in a gamified program designed to be 100% hands-on.Our Syllabus is based on Javascript, React JS, Python, Django, Mongo DB, AJAX, API, among other exciting technologies. You will be trained in the most wanted technologies in Miami; just what companies are looking for!NOTE: Our programs are up to 14 students. Few spots available per cohort. Just click here if you want to meet with us. The program will start on August, 13th. This is your chance to understand how Coding will change your professional life!",
-                                "title": "4Geeks Nights: INFO+CODING+GAMES+DRINKS",
-                                "url": "https://www.eventbrite.com/e/4geeks-nights-infocodinggamesdrinks-tickets-46847266435",
-                                "capacity": "100",
-                                "event_date": "2018-06-28 18:00:00",
-                                "type": "intro_to_coding",
-                                "address": "66 West Flagler Street #900, Miami, FL 33130",
-                                "location_slug": "downtown-miami",
-                                "lang": "en",
-                                "city_slug": "mia",
-                                "banner_url": "http://placehold.it/800x400",
-                                "invite_only": "0",
-                                "created_at": "2018-06-19 16:18:50",
-                                "id": "1",
-                                "status": "published",
-                                "logo_url": null
-                              },
-                            {
-                                description: "4Geeks Nights - Learn to Code for Free Coding is no longer a dream. We are closing the gap and bringing coding to your life. A master platform, full of exercises and content, for free. To begin, we will give you free access to our Coding Introduction Program, where you will find everything you need to start your training as a software developer. HTML, CSS, Bootstrap, JavaScript and more. This is not only reading, videos, and tutorials, but tons of exercises and projects to work with.We have five -probably more- GREAT reasons why you should be in our 4Geeks Nights event on June 28th.- You will get FREE access to the Coding Intro Program and platform. Learn to Code has never been easy and better;- You will get free mentorship hours every week;- Our Career Support program speaks for itself. You will meet our Alumni; one of them will talk about his projects and experience at 4Geeks!- You will have fun while meeting our entire team & office: Founders, instructors, partners and classroom spaces. Have a drink with us!- You will get the details about our Software Program. Full Stack + Part-time + Premium Education + Best pricing options'- Play Kill the Bug and earn a prize!Every 2 months we are launching new programs and you can be part of the next 4Geeks Alumni as a Full-Stack Software Developer. Get ready to change your life.Come. Have fun. Learn to Code. Let's celebrate together our way of making Coding a possibility to your career.A little bit about our program:Become a software developer in 16 weeks, with a part-time/blended methodology and with pricing options starting at $140p/mo. You will get more than 320 hours of training, in a gamified program designed to be 100% hands-on.Our Syllabus is based on Javascript, React JS, Python, Django, Mongo DB, AJAX, API, among other exciting technologies. You will be trained in the most wanted technologies in Miami; just what companies are looking for!NOTE: Our programs are up to 14 students. Few spots available per cohort. Just click here if you want to meet with us. The program will start on August, 13th. This is your chance to understand how Coding will change your professional life!",
-                                title: "4Geeks Nights: INFO+CODING+GAMES+DRINKS",
-                                url: "https://www.eventbrite.com/e/4geeks-nights-infocodinggamesdrinks-tickets-46847266435",
-                                capacity: "100",
-                                logo_url: "https://pbs.twimg.com/profile_images/930433054371434496/v8GNrusZ_400x400.jpg",
-                                event_date: "2018-06-28 18:00:00",
-                                type: "intro_to_coding",
-                                address: "66 West Flagler Street #900, Miami, FL 33130",
-                                location_slug: "downtown-miami",
-                                lang: "en",
-                                city_slug: "mia",
-                                banner_url: "http://placehold.it/800x400",
-                                invite_only: "0",
-                                created_at: "2018-06-30 16:18:50",
-                                id: "8",
-                                finished: false
-                            },
-                            {
-                                description: "4Geeks Nights - Learn to Code for Free Coding is no longer a dream. We are closing the gap and bringing coding to your life. A master platform, full of exercises and content, for free. To begin, we will give you free access to our Coding Introduction Program, where you will find everything you need to start your training as a software developer. HTML, CSS, Bootstrap, JavaScript and more. This is not only reading, videos, and tutorials, but tons of exercises and projects to work with.We have five -probably more- GREAT reasons why you should be in our 4Geeks Nights event on June 28th.- You will get FREE access to the Coding Intro Program and platform. Learn to Code has never been easy and better;- You will get free mentorship hours every week;- Our Career Support program speaks for itself. You will meet our Alumni; one of them will talk about his projects and experience at 4Geeks!- You will have fun while meeting our entire team & office: Founders, instructors, partners and classroom spaces. Have a drink with us!- You will get the details about our Software Program. Full Stack + Part-time + Premium Education + Best pricing options'- Play Kill the Bug and earn a prize!Every 2 months we are launching new programs and you can be part of the next 4Geeks Alumni as a Full-Stack Software Developer. Get ready to change your life.Come. Have fun. Learn to Code. Let's celebrate together our way of making Coding a possibility to your career.A little bit about our program:Become a software developer in 16 weeks, with a part-time/blended methodology and with pricing options starting at $140p/mo. You will get more than 320 hours of training, in a gamified program designed to be 100% hands-on.Our Syllabus is based on Javascript, React JS, Python, Django, Mongo DB, AJAX, API, among other exciting technologies. You will be trained in the most wanted technologies in Miami; just what companies are looking for!NOTE: Our programs are up to 14 students. Few spots available per cohort. Just click here if you want to meet with us. The program will start on August, 13th. This is your chance to understand how Coding will change your professional life!",
-                                title: "4Geeks Nights: INFO + CODING + GAMES + DRINKS",
-                                url: "https://www.eventbrite.com/e/4geeks-nights-infocodinggamesdrinks-tickets-46847266435",
-                                capacity: "100",
-                                logo_url: "https://pbs.twimg.com/profile_images/930433054371434496/v8GNrusZ_400x400.jpg",
-                                event_date: "2018-06-28 18:00:00",
-                                type: "coding_weekend",
-                                address: "66 West Flagler Street #900, Miami, FL 33130",
-                                location_slug: "",
-                                lang: "es",
-                                city_slug: "mia",
-                                banner_url: "http://placehold.it/800x400",
-                                invite_only: "0",
-                                created_at: "2018-07-19 16:18:50",
-                                id: "1",
-                                finished: false
-                            },
-                            {
-                                "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                                "title": "Intro To Coding ",
-                                "url": "https://www.4geekscademy.co",
-                                "capacity": "100",
-                                "logo_url": "https://upload.wikimedia.org/wikipedia/en/8/84/MiamiDadeCollegeLogo.png",
-                                "invite_only": "0",
-                                "created_at": "2018-06-13 11:27:04",
-                                "id": "6",
-                                "banner_url": null,
-                                "event_date": "2018-08-20 20:30:00",
-                                "type": "intro_to_coding",
-                                "city_slug": "mia",
-                                address: "627 SW 27th Ave, Miami, FL 33135",
-                                lang: "es",
-                                finished: false
-                            },
-                            {
-                            "description": "4Geeks Nights - Learn to Code for Free Coding is no longer a dream. We are closing the gap and bringing coding to your life. A master platform, full of exercises and content, for free. To begin, we will give you free access to our Coding Introduction Program, where you will find everything you need to start your training as a software developer. HTML, CSS, Bootstrap, JavaScript and more. This is not only reading, videos, and tutorials, but tons of exercises and projects to work with.We have five -probably more- GREAT reasons why you should be in our 4Geeks Nights event on June 28th.- You will get FREE access to the Coding Intro Program and platform. Learn to Code has never been easy and better;- You will get free mentorship hours every week;- Our Career Support program speaks for itself. You will meet our Alumni; one of them will talk about his projects and experience at 4Geeks!- You will have fun while meeting our entire team & office: Founders, instructors, partners and classroom spaces. Have a drink with us!- You will get the details about our Software Program.",
-                            "title": "4Geeks Nights: INFO+CODING+GAMES+DRINKS",
-                            "url": "https://www.eventbrite.com/e/4geeks-nights-infocodinggamesdrinks-tickets-46847266435",
-                            "capacity": "100",
-                            "logo_url": "https://pbs.twimg.com/profile_images/930433054371434496/v8GNrusZ_400x400.jpg",
-                            "invite_only": "0",
-                            "created_at": "2018-06-14 16:54:50",
-                            "id": "7",
-                            "banner_url": null,
-                            "event_date": "2018-06-28 18:00:00",
-                            "type": "intro_to_coding",
-                            "city_slug": "mia",
-                            lang: "es",
-                            "address": "66 West Flagler Street #900, Miami, FL 33130",
-                            finished: false
-                            },
-                            {
-                            "description": "Description for the event",
-                            "title": "asd",
-                            "url": "http://www.asdads.com",
-                            "capacity": "200",
-                            "logo_url": "http://www.asdads.com",
-                            "invite_only": "1",
-                            "created_at": "2018-06-12 14:58:52",
-                            "id": "4",
-                            "banner_url": null,
-                            "event_date": "2017-08-20 20:30:00",
-                            "type": "coding_weekend",
-                            "city_slug": "ccs",
-                            lang: "en",
-                            "address": null,
-                            finished: true
-                            },
-                            {
-                            "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            "title": "This is a very long Title of an Event",
-                            "url": "https://www.4geekscademy.co",
-                            "capacity": "100",
-                            "logo_url": "https://www.4geeksacademy.co/wp-content/themes/the-fastest/assets/img/icon-logo.png",
-                            "invite_only": "1",
-                            "created_at": "2018-06-13 11:02:19",
-                            "id": "5",
-                            "banner_url": null,
-                            "event_date": "2017-08-20 20:30:00",
-                            "type": "coding_weekend",
-                            "city_slug": "ccs",
-                            lang: "en",
-                            "address": "66 W Flagler St #900, Miami, FL 33130",
-                            finished: true
-                            },
-                            {
-                            "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            "title": "Intro To Coding",
-                            "url": "https://www.eventbrite.com/e/learn-to-code-at-miami-dade-college-fall-term-information-session-tickets-46294138013?aff=ebdssbdestsearch",
-                            "capacity": "100",
-                            "logo_url": "https://en.wikipedia.org/wiki/Miami_Dade_College",
-                            "invite_only": "0",
-                            "created_at": "2018-06-07 11:10:44",
-                            "id": "12",
-                            "banner_url": null,
-                            "event_date": null,
-                            "type": "workshop",
-                            "city_slug": "miami",
-                            lang: "en",
-                            "address": null,
-                            finished: true
-                            },
-                            {
-                            "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            "title": "Coding Weekends",
-                            "url": "https://www.4geekscademy.co",
-                            "capacity": "100",
-                            "logo_url": "https://www.4geeksacademy.co/wp-content/themes/the-fastest/assets/img/icon-logo.png",
-                            "invite_only": "0",
-                            "created_at": "2018-06-07 11:15:26",
-                            "id": "2",
-                            "banner_url": null,
-                            "event_date": null,
-                            "type": "workshop",
-                            "city_slug": "miami",
-                            lang: "en",
-                            "address": null,
-                            finished: true
-                            },
-                            {
-                            "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            "title": "Coding Weekends",
-                            "url": "https://www.4geekscademy.co",
-                            "capacity": "100",
-                            "logo_url": "https://www.4geeksacademy.co/wp-content/themes/the-fastest/assets/img/icon-logo.png",
-                            "invite_only": "0",
-                            "created_at": "2018-06-07 11:47:47",
-                            "id": "3",
-                            "banner_url": null,
-                            "event_date": null,
-                            "type": "workshop",
-                            "city_slug": "miami",
-                            lang: "en",
-                            "address": null,
-                            finished: true
-                            }
-                        ],
-            "session":{},
+                        {
+                        "description": "<p>An event for all the blockchain developers to meet</p>",
+                        "title": "Blockchain coders gather up ",
+                        "url": "http://hola.com",
+                        "capacity": "100",
+                        "event_date": "2018-09-15 02:00:00",
+                        "type": "other",
+                        "address": "66 W Flagler St #900, Miami, FL 33130",
+                        "location_slug": "downtown-miami",
+                        "lang": "en",
+                        "city_slug": "miami",
+                        "banner_url": "http://hola.com",
+                        "invite_only": "false",
+                        "created_at": "2018-07-14 13:03:49",
+                        "id": "5",
+                        "status": "draft",
+                        "logo_url": null
+                        },
+                        {
+                        "description": "<p>1 hora y 40 de duracion</p><p>25 $</p>",
+                        "title": "Use case: coding a dApp to certify documents on the Ethereum BLockchain ",
+                        "url": "http://hola.com",
+                        "capacity": "100",
+                        "event_date": "2018-09-01 12:00:00",
+                        "type": "workshop",
+                        "address": "66 W Flagler St #900, Miami, FL 33130",
+                        "location_slug": "downtown-miami",
+                        "lang": "en",
+                        "city_slug": "miami",
+                        "banner_url": "http://hola.com",
+                        "invite_only": "false",
+                        "created_at": "2018-07-14 12:54:01",
+                        "id": "4",
+                        "status": "draft",
+                        "logo_url": null
+                        },
+                        {
+                        "description": "<p>25$</p><p>1 hora y 40</p>",
+                        "title": "Coding your first dApp in the Blockchain using Ethereum ",
+                        "url": "http://hola.com",
+                        "capacity": "100",
+                        "event_date": "2018-08-04 02:00:00",
+                        "type": "workshop",
+                        "address": "66 W Flagler St #900, Miami, FL 33130",
+                        "location_slug": "downtown-miami",
+                        "lang": "en",
+                        "city_slug": "miami",
+                        "banner_url": "http://hola.com",
+                        "invite_only": "false",
+                        "created_at": "2018-07-14 12:47:06",
+                        "id": "3",
+                        "status": "draft",
+                        "logo_url": null
+                        },
+                        {
+                        "description": "<h2>4Geeks Nights - Learn to Code for Free</h2><p>Coding is no longer a dream. We are closing the gap and bringing coding to your life. A master platform, full of exercises and content, for free.</p><p>To begin, we will give you free access to our Coding Introduction Program, where you will find everything you need to start your training as a software developer. HTML, CSS, Bootstrap, JavaScript and more. This is not only reading, videos, and tutorials, but tons of exercises and projects to work with.</p><p><br></p><p>We have&nbsp;at least five&nbsp;GREAT reasons why you should&nbsp;attend&nbsp;our 4Geeks Nights event on June&nbsp;28th:</p><p><br></p><p>- You will&nbsp;have&nbsp;FREE access to the Coding Intro Program and platform.&nbsp;Learning&nbsp;to Code has never been easy and&nbsp;better.</p><p><br></p><p>- You will&nbsp;receive&nbsp;free mentorship hours every&nbsp;week.</p><p><br></p><p>- Our Career Support program speaks for&nbsp;itself…You&nbsp;will meetsome of&nbsp;our&nbsp;Alumni and hear about their personal projects and overall experience&nbsp;at 4Geeks!</p><p><br></p><p>- You will have fun while meeting our entire team &amp; office: Founders, instructors, partners and classroom spaces. Have a drink with us!</p><p><br></p><p>- You will get the details about our Software Program. Full Stack + Part-time + Premium Education + Best pricing&nbsp;options.</p><p><br></p><p>- Play Kill the Bug and earn a prize!</p><p><br></p><p>We are launching new programs every two months&nbsp;and you canbecome part of our&nbsp;next 4Geeks Alumni as a Full-Stack Software Developer. Get ready to change your&nbsp;life!</p><p><br></p><p>Come. Have fun. Learn to Code. Let's celebrate together our way of making Coding a possibility&nbsp;to your current or new career.</p><p><br></p><p>A little bit about our program:</p><p><br></p><p>Become a software developer in 16 weeks, with a part-time/blended methodology and with pricing options starting at$140/mo.&nbsp;You will get&nbsp;over&nbsp;320 hours of&nbsp;training in&nbsp;a gamified program designed to be 100% hands-on.</p><p><br></p><p>Our Syllabus is based on&nbsp;JavaScript, React JS, Python, Django, Mongo DB, AJAX, API,&nbsp;and&nbsp;other exciting technologies. You will be trained in the most&nbsp;desired&nbsp;technologies in&nbsp;Miami in exactlywhat companies are looking for!</p><p><br></p><p>NOTE: Our programs&nbsp;have a maximum capacity of 14&nbsp;students, so there are only a few spots availableper cohort. Just click here if you want to meet with us.&nbsp;The next program&nbsp;will start&nbsp;on August 13th.&nbsp;This is your chance to understand how Coding will change your professional life!</p>",
+                        "title": "4Geeks Nights: INFO+CODING+GAMES+DRINKS",
+                        "url": "https://www.eventbrite.com/e/4geeks-nights-infocodinggamesdrinks-tickets-47588520546",
+                        "capacity": "100",
+                        "event_date": "2018-07-28 06:00:00",
+                        "type": "4geeks_night",
+                        "address": "66 West Flagler Street  #900",
+                        "location_slug": "downtown-miami",
+                        "lang": "en",
+                        "city_slug": "miami",
+                        "banner_url": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F46680560%2F154764716258%2F1%2Foriginal.jpg?rect=0%2C60%2C960%2C480&auto=compress&w=2000&s=af8051ba98cddee95edbcd4ec904f334",
+                        "invite_only": "false",
+                        "created_at": "2018-06-29 10:31:56",
+                        "id": "2",
+                        "status": "published",
+                        "logo_url": null
+                        },
+                        {
+                        "description": "4Geeks Nights - Learn to Code for Free Coding is no longer a dream. We are closing the gap and bringing coding to your life. A master platform, full of exercises and content, for free. To begin, we will give you free access to our Coding Introduction Program, where you will find everything you need to start your training as a software developer. HTML, CSS, Bootstrap, JavaScript and more. This is not only reading, videos, and tutorials, but tons of exercises and projects to work with.We have five -probably more- GREAT reasons why you should be in our 4Geeks Nights event on June 28th.- You will get FREE access to the Coding Intro Program and platform. Learn to Code has never been easy and better;- You will get free mentorship hours every week;- Our Career Support program speaks for itself. You will meet our Alumni; one of them will talk about his projects and experience at 4Geeks!- You will have fun while meeting our entire team & office: Founders, instructors, partners and classroom spaces. Have a drink with us!- You will get the details about our Software Program.  Full Stack + Part-time + Premium Education + Best pricing options'- Play Kill the Bug and earn a prize!Every 2 months we are launching new programs and you can be part of the next 4Geeks Alumni as a Full-Stack Software Developer. Get ready to change your life.Come. Have fun. Learn to Code. Let's celebrate together our way of making Coding a possibility to your career.A little bit about our program:Become a software developer in 16 weeks, with a part-time/blended methodology and with pricing options starting at $140p/mo. You will get more than 320 hours of training, in a gamified program designed to be 100% hands-on.Our Syllabus is based on Javascript, React JS, Python, Django, Mongo DB, AJAX, API, among other exciting technologies. You will be trained in the most wanted technologies in Miami; just what companies are looking for!NOTE: Our programs are up to 14 students. Few spots available per cohort. Just click here if you want to meet with us. The program will start on August, 13th. This is your chance to understand how Coding will change your professional life!",
+                        "title": "4Geeks Nights: INFO+CODING+GAMES+DRINKS",
+                        "url": "https://www.eventbrite.com/e/4geeks-nights-infocodinggamesdrinks-tickets-46847266435",
+                        "capacity": "100",
+                        "event_date": "2018-06-28 18:00:00",
+                        "type": "intro_to_coding",
+                        "address": "66 West Flagler Street #900, Miami, FL 33130",
+                        "location_slug": "downtown-miami",
+                        "lang": "en",
+                        "city_slug": "mia",
+                        "banner_url": "http://placehold.it/800x400",
+                        "invite_only": "0",
+                        "created_at": "2018-06-19 16:18:50",
+                        "id": "1",
+                        "status": "published",
+                        "logo_url": null
+                        },
+                        {
+                        description: "4Geeks Nights - Learn to Code for Free Coding is no longer a dream. We are closing the gap and bringing coding to your life. A master platform, full of exercises and content, for free. To begin, we will give you free access to our Coding Introduction Program, where you will find everything you need to start your training as a software developer. HTML, CSS, Bootstrap, JavaScript and more. This is not only reading, videos, and tutorials, but tons of exercises and projects to work with.We have five -probably more- GREAT reasons why you should be in our 4Geeks Nights event on June 28th.- You will get FREE access to the Coding Intro Program and platform. Learn to Code has never been easy and better;- You will get free mentorship hours every week;- Our Career Support program speaks for itself. You will meet our Alumni; one of them will talk about his projects and experience at 4Geeks!- You will have fun while meeting our entire team & office: Founders, instructors, partners and classroom spaces. Have a drink with us!- You will get the details about our Software Program. Full Stack + Part-time + Premium Education + Best pricing options'- Play Kill the Bug and earn a prize!Every 2 months we are launching new programs and you can be part of the next 4Geeks Alumni as a Full-Stack Software Developer. Get ready to change your life.Come. Have fun. Learn to Code. Let's celebrate together our way of making Coding a possibility to your career.A little bit about our program:Become a software developer in 16 weeks, with a part-time/blended methodology and with pricing options starting at $140p/mo. You will get more than 320 hours of training, in a gamified program designed to be 100% hands-on.Our Syllabus is based on Javascript, React JS, Python, Django, Mongo DB, AJAX, API, among other exciting technologies. You will be trained in the most wanted technologies in Miami; just what companies are looking for!NOTE: Our programs are up to 14 students. Few spots available per cohort. Just click here if you want to meet with us. The program will start on August, 13th. This is your chance to understand how Coding will change your professional life!",
+                        title: "4Geeks Nights: INFO+CODING+GAMES+DRINKS",
+                        url: "https://www.eventbrite.com/e/4geeks-nights-infocodinggamesdrinks-tickets-46847266435",
+                        capacity: "100",
+                        logo_url: "https://pbs.twimg.com/profile_images/930433054371434496/v8GNrusZ_400x400.jpg",
+                        event_date: "2018-06-28 18:00:00",
+                        type: "intro_to_coding",
+                        address: "66 West Flagler Street #900, Miami, FL 33130",
+                        location_slug: "downtown-miami",
+                        lang: "en",
+                        city_slug: "mia",
+                        banner_url: "http://placehold.it/800x400",
+                        invite_only: "0",
+                        created_at: "2018-06-30 16:18:50",
+                        id: "8",
+                        finished: false
+                        },
+                        {
+                        description: "4Geeks Nights - Learn to Code for Free Coding is no longer a dream. We are closing the gap and bringing coding to your life. A master platform, full of exercises and content, for free. To begin, we will give you free access to our Coding Introduction Program, where you will find everything you need to start your training as a software developer. HTML, CSS, Bootstrap, JavaScript and more. This is not only reading, videos, and tutorials, but tons of exercises and projects to work with.We have five -probably more- GREAT reasons why you should be in our 4Geeks Nights event on June 28th.- You will get FREE access to the Coding Intro Program and platform. Learn to Code has never been easy and better;- You will get free mentorship hours every week;- Our Career Support program speaks for itself. You will meet our Alumni; one of them will talk about his projects and experience at 4Geeks!- You will have fun while meeting our entire team & office: Founders, instructors, partners and classroom spaces. Have a drink with us!- You will get the details about our Software Program. Full Stack + Part-time + Premium Education + Best pricing options'- Play Kill the Bug and earn a prize!Every 2 months we are launching new programs and you can be part of the next 4Geeks Alumni as a Full-Stack Software Developer. Get ready to change your life.Come. Have fun. Learn to Code. Let's celebrate together our way of making Coding a possibility to your career.A little bit about our program:Become a software developer in 16 weeks, with a part-time/blended methodology and with pricing options starting at $140p/mo. You will get more than 320 hours of training, in a gamified program designed to be 100% hands-on.Our Syllabus is based on Javascript, React JS, Python, Django, Mongo DB, AJAX, API, among other exciting technologies. You will be trained in the most wanted technologies in Miami; just what companies are looking for!NOTE: Our programs are up to 14 students. Few spots available per cohort. Just click here if you want to meet with us. The program will start on August, 13th. This is your chance to understand how Coding will change your professional life!",
+                        title: "4Geeks Nights: INFO + CODING + GAMES + DRINKS",
+                        url: "https://www.eventbrite.com/e/4geeks-nights-infocodinggamesdrinks-tickets-46847266435",
+                        capacity: "100",
+                        logo_url: "https://pbs.twimg.com/profile_images/930433054371434496/v8GNrusZ_400x400.jpg",
+                        event_date: "2018-06-28 18:00:00",
+                        type: "coding_weekend",
+                        address: "66 West Flagler Street #900, Miami, FL 33130",
+                        location_slug: "",
+                        lang: "es",
+                        city_slug: "mia",
+                        banner_url: "http://placehold.it/800x400",
+                        invite_only: "0",
+                        created_at: "2018-07-19 16:18:50",
+                        id: "1",
+                        finished: false
+                        },
+                        {
+                        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                        "title": "Intro To Coding ",
+                        "url": "https://www.4geekscademy.co",
+                        "capacity": "100",
+                        "logo_url": "https://upload.wikimedia.org/wikipedia/en/8/84/MiamiDadeCollegeLogo.png",
+                        "invite_only": "0",
+                        "created_at": "2018-06-13 11:27:04",
+                        "id": "6",
+                        "banner_url": null,
+                        "event_date": "2018-08-20 20:30:00",
+                        "type": "intro_to_coding",
+                        "city_slug": "mia",
+                        address: "627 SW 27th Ave, Miami, FL 33135",
+                        lang: "es",
+                        finished: false
+                        },
+                        {
+                        "description": "4Geeks Nights - Learn to Code for Free Coding is no longer a dream. We are closing the gap and bringing coding to your life. A master platform, full of exercises and content, for free. To begin, we will give you free access to our Coding Introduction Program, where you will find everything you need to start your training as a software developer. HTML, CSS, Bootstrap, JavaScript and more. This is not only reading, videos, and tutorials, but tons of exercises and projects to work with.We have five -probably more- GREAT reasons why you should be in our 4Geeks Nights event on June 28th.- You will get FREE access to the Coding Intro Program and platform. Learn to Code has never been easy and better;- You will get free mentorship hours every week;- Our Career Support program speaks for itself. You will meet our Alumni; one of them will talk about his projects and experience at 4Geeks!- You will have fun while meeting our entire team & office: Founders, instructors, partners and classroom spaces. Have a drink with us!- You will get the details about our Software Program.",
+                        "title": "4Geeks Nights: INFO+CODING+GAMES+DRINKS",
+                        "url": "https://www.eventbrite.com/e/4geeks-nights-infocodinggamesdrinks-tickets-46847266435",
+                        "capacity": "100",
+                        "logo_url": "https://pbs.twimg.com/profile_images/930433054371434496/v8GNrusZ_400x400.jpg",
+                        "invite_only": "0",
+                        "created_at": "2018-06-14 16:54:50",
+                        "id": "7",
+                        "banner_url": null,
+                        "event_date": "2018-06-28 18:00:00",
+                        "type": "intro_to_coding",
+                        "city_slug": "mia",
+                        lang: "es",
+                        "address": "66 West Flagler Street #900, Miami, FL 33130",
+                        finished: false
+                        },
+                        {
+                        "description": "Description for the event",
+                        "title": "asd",
+                        "url": "http://www.asdads.com",
+                        "capacity": "200",
+                        "logo_url": "http://www.asdads.com",
+                        "invite_only": "1",
+                        "created_at": "2018-06-12 14:58:52",
+                        "id": "4",
+                        "banner_url": null,
+                        "event_date": "2017-08-20 20:30:00",
+                        "type": "coding_weekend",
+                        "city_slug": "ccs",
+                        lang: "en",
+                        "address": null,
+                        finished: true
+                        },
+                        {
+                        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                        "title": "This is a very long Title of an Event",
+                        "url": "https://www.4geekscademy.co",
+                        "capacity": "100",
+                        "logo_url": "https://www.4geeksacademy.co/wp-content/themes/the-fastest/assets/img/icon-logo.png",
+                        "invite_only": "1",
+                        "created_at": "2018-06-13 11:02:19",
+                        "id": "5",
+                        "banner_url": null,
+                        "event_date": "2017-08-20 20:30:00",
+                        "type": "coding_weekend",
+                        "city_slug": "ccs",
+                        lang: "en",
+                        "address": "66 W Flagler St #900, Miami, FL 33130",
+                        finished: true
+                        },
+                        {
+                        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                        "title": "Intro To Coding",
+                        "url": "https://www.eventbrite.com/e/learn-to-code-at-miami-dade-college-fall-term-information-session-tickets-46294138013?aff=ebdssbdestsearch",
+                        "capacity": "100",
+                        "logo_url": "https://en.wikipedia.org/wiki/Miami_Dade_College",
+                        "invite_only": "0",
+                        "created_at": "2018-06-07 11:10:44",
+                        "id": "12",
+                        "banner_url": null,
+                        "event_date": null,
+                        "type": "workshop",
+                        "city_slug": "miami",
+                        lang: "en",
+                        "address": null,
+                        finished: true
+                        },
+                        {
+                        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                        "title": "Coding Weekends",
+                        "url": "https://www.4geekscademy.co",
+                        "capacity": "100",
+                        "logo_url": "https://www.4geeksacademy.co/wp-content/themes/the-fastest/assets/img/icon-logo.png",
+                        "invite_only": "0",
+                        "created_at": "2018-06-07 11:15:26",
+                        "id": "2",
+                        "banner_url": null,
+                        "event_date": null,
+                        "type": "workshop",
+                        "city_slug": "miami",
+                        lang: "en",
+                        "address": null,
+                        finished: true
+                        },
+                        {
+                        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                        "title": "Coding Weekends",
+                        "url": "https://www.4geekscademy.co",
+                        "capacity": "100",
+                        "logo_url": "https://www.4geeksacademy.co/wp-content/themes/the-fastest/assets/img/icon-logo.png",
+                        "invite_only": "0",
+                        "created_at": "2018-06-07 11:47:47",
+                        "id": "3",
+                        "banner_url": null,
+                        "event_date": null,
+                        "type": "workshop",
+                        "city_slug": "miami",
+                        lang: "en",
+                        "address": null,
+                        finished: true
+                        }
+                    ],
             "courses":[/*
                           {
                             "day": "28",
@@ -473,8 +472,6 @@ class MeetupStore extends Flux.Store{
     }
     
     _loadDataEvents(data){
-        //let tempState = this.state;
-        //tempState.events = data;
         data = data.filter( event => Moment(event.event_date).diff( Moment(), "d" ) > 0 );
         this.setStoreState({events: data}).emit();
     }
@@ -522,34 +519,6 @@ class MeetupStore extends Flux.Store{
     
     getError(){
         return this.state.error;
-    }
-    
-    _setSession(userInfo){
-        let tempState = this.state;
-        tempState.session = userInfo;
-        
-        this.setStoreState(tempState).emit();
-    }
-    
-    getSession(){
-        return this.state.session;
-    }
-    
-    _rsvpSuccessful(args){
-        let tempState = this.state;
-        tempState.events.map( (anEvent) => {
-            if(anEvent.ID === parseInt(args[0]) ){
-                anEvent.meta_keys._rsvpYes.push(args[1]);
-            }
-        });
-
-        this.setStoreState(tempState).emit();
-    }
-    
-    _endSession(){
-        let tempState = this.state;
-        tempState.session = {};
-        this.setStoreState(tempState).emit();
     }
     
     getLocations(){

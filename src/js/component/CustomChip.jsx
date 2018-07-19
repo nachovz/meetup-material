@@ -6,9 +6,7 @@ import Chip from '@material-ui/core/Chip';
 import Tooltip from '@material-ui/core/Tooltip';
 
 function CustomChip(props){
-    
     var chip = (
-        
         <Chip
             avatar={
                 <Avatar
@@ -22,7 +20,7 @@ function CustomChip(props){
             onClick={props.onClick}
             //clickable={props.clickable}
         />
-        );
+    );
     
     if(props.tooltipTitle) return (<Tooltip id="tooltip-icon" title={props.tooltipTitle}>{chip}</Tooltip>);
     

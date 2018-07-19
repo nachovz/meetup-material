@@ -84,7 +84,6 @@ class Dashboard extends Flux.View {
         this.bindStore(meetupStore, function(){
             this.setState({
                 events: meetupStore.getAllEvents(),
-                session: meetupStore.getSession(),
                 locations: meetupStore.getLocations(),
                 filter: 'All',
                 locationFilter: 'All',
@@ -108,7 +107,7 @@ class Dashboard extends Flux.View {
                 <div className={classes.heroUnit} id="heroUnit-main">
                     <Typography component="h1" variant="display1" color="inherit" className={classes.heroText}>Select a location:  </Typography>
                     <form autoComplete="off">
-                        <FormControl className={classes.inlineForm}>
+                        <FormControl className={classes.inlineForm} id="heroSelect">
                             <Select
                                 value={this.state.locationFilter}
                                 onChange={this.handleChange}

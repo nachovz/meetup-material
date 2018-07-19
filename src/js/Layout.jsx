@@ -21,13 +21,6 @@ export default class Layout extends Flux.View {
   constructor(){
     super();
     meetupActions.loadApiEvents();
-    
-    this.bindStore(meetupStore, function(){
-        // retreive events data
-        this.setState({
-            session: meetupStore.getSession()
-        });
-    });
   }
   
   render() {

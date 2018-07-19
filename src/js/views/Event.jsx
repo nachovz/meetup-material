@@ -31,8 +31,7 @@ const styles = theme => ({
     maxWidth: 1000,
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginBottom: 100,
-    marginTop: theme.spacing.unit*2
+    marginBottom: 100
   },
   cardHeader: {
       paddingBottom:0
@@ -93,6 +92,9 @@ const styles = theme => ({
     position: 'fixed',
     bottom: theme.spacing.unit * 2,
     right: theme.spacing.unit * 2
+  },
+  eventContent:{
+      padding: theme.spacing.unit
   }
 });
 
@@ -102,16 +104,13 @@ class Event extends Flux.View {
         super(props);
         
         this.state = {
-            event: meetupStore.getEvent(props.match.params.theid),
-            session: {},
-            expanded: false
+            event: meetupStore.getEvent(props.match.params.theid)
         };
         
         this.bindStore(meetupStore, function(){
             // retreive any store data
             this.setState({
-                event: meetupStore.getEvent(this.props.match.params.theid),
-                session: meetupStore.getSession()
+                event: meetupStore.getEvent(this.props.match.params.theid)
             });
         });
     }
@@ -119,8 +118,7 @@ class Event extends Flux.View {
     componentWillMount(){
         
         this.setState({
-            event: meetupStore.getEvent(this.props.match.params.theid),
-            session: meetupStore.getSession()
+            event: meetupStore.getEvent(this.props.match.params.theid)
         });
     }
     
@@ -143,89 +141,86 @@ class Event extends Flux.View {
         }
 
     return (
-        <React.Fragment>
-            <Card className={classes.card}>
-                <CardHeader
-                avatar={
-                    <Avatar
-                        aria-label="Recipe"
-                        src={event.logo_url || "https://pbs.twimg.com/profile_images/930433054371434496/v8GNrusZ_400x400.jpg"}
-                        className={classNames(classes.avatar, classes.bigAvatar)}
-                    />
-                }
-                title={event.title}
-                subheader={eventDay+" "+eventTime}
-                className={classes.cardHeader}
+        <Card className={classes.card}>
+            <CardHeader
+            avatar={
+                <Avatar
+                    aria-label="Recipe"
+                    src={event.logo_url || "https://pbs.twimg.com/profile_images/930433054371434496/v8GNrusZ_400x400.jpg"}
+                    className={classNames(classes.avatar, classes.bigAvatar)}
                 />
-                <CardContent>
-                    <div className={classes.badgesContainer}>
-                        { event.address && (
-                            <CustomChip 
-                                classes={classes} 
-                                label={event.address}
-                                clickable={true}
-                                onClick={() => window.open("https://maps.google.com/maps?q="+event.address , "_blank")}
-                                icon={<DirectionsIcon />}
-                            />
-                            )
-                        }
-                        { event.capacity && (
-                            <CustomChip 
-                                classes={classes} 
-                                label={event.capacity}
-                                tooltipTitle="Capacity"
-                                icon={<GroupIcon/>}
-                            />
-                            )
-                        }
-                        { event.type && (
-                            <CustomChip 
-                                classes={classes} 
-                                label={event.type}
-                                tooltipTitle="Type"
-                                icon={<LabelIcon/>}
-                            />
-                            )
-                        }
-                        { event.city_slug && (
-                            <CustomChip 
-                                classes={classes} 
-                                label={event.city_slug.toUpperCase()}
-                                icon={<LocationCityIcon/>}
-                            />
-                            )
-                        }
-                        { event.invite_only === "1" && (
-                            <CustomChip 
-                                classes={classes} 
-                                label="Invitation required"
-                                tooltipTitle="Invitation Only"
-                                icon={<AnnouncementIcon/>}
-                            />
-                            )
-                        }
-                    </div>
-                    <Typography component="p">
-                        {ReactHtmlParser(event.description)}
-                    </Typography>
-                </CardContent>
-                <CardActions className={classes.actions} disableActionSpacing>
-                    <IconButton aria-label="Share">
-                        <ShareIcon />
-                    </IconButton>
-
-                </CardActions>
-                <Button 
-                    variant="fab" 
-                    color="secondary" 
-                    className={classNames(classes.button, classes.fab)} 
-                    onClick={() => window.open(event.url,"_blank")}>
-                    <Tooltip open={true} title="RSVP ➤" placement="left">
-                        <CheckIcon/>
-                    </Tooltip>
-                </Button>
-            </Card>
-        </React.Fragment>
+            }
+            title={event.title}
+            subheader={eventDay+" "+eventTime}
+            className={classes.cardHeader}
+            />
+            <CardContent>
+                <div className={classes.badgesContainer}>
+                    { event.address && (
+                        <CustomChip 
+                            classes={classes} 
+                            label={event.address}
+                            clickable={true}
+                            onClick={() => window.open("https://maps.google.com/maps?q="+event.address , "_blank")}
+                            icon={<DirectionsIcon />}
+                        />
+                        )
+                    }
+                    { event.capacity && (
+                        <CustomChip 
+                            classes={classes} 
+                            label={event.capacity}
+                            tooltipTitle="Capacity"
+                            icon={<GroupIcon/>}
+                        />
+                        )
+                    }
+                    { event.type && (
+                        <CustomChip 
+                            classes={classes} 
+                            label={event.type}
+                            tooltipTitle="Type"
+                            icon={<LabelIcon/>}
+                        />
+                        )
+                    }
+                    { event.city_slug && (
+                        <CustomChip 
+                            classes={classes} 
+                            label={event.city_slug.toUpperCase()}
+                            icon={<LocationCityIcon/>}
+                        />
+                        )
+                    }
+                    { event.invite_only === "1" && (
+                        <CustomChip 
+                            classes={classes} 
+                            label="Invitation required"
+                            tooltipTitle="Invitation Only"
+                            icon={<AnnouncementIcon/>}
+                        />
+                        )
+                    }
+                </div>
+                <Typography className={classes.eventContent}>
+                    {ReactHtmlParser(event.description)}
+                </Typography>
+            </CardContent>
+            <CardActions className={classes.actions} disableActionSpacing>
+                <IconButton aria-label="Share">
+                    <ShareIcon />
+                </IconButton>
+            </CardActions>
+            <Button 
+                variant="fab" 
+                color="secondary" 
+                className={classNames(classes.button, classes.fab)} 
+                onClick={() => window.open(event.url,"_blank")}>
+                <Tooltip open={true} title="RSVP ➤ " placement="left">
+                    <CheckIcon/>
+                </Tooltip>
+            </Button>
+        </Card>
         );
     }
 }

@@ -1,10 +1,7 @@
 import Flux from "@4geeksacademy/react-flux-dash";
-import ReactGA from 'react-ga';
-import {UserContext} from '../component/user-context';
 
 class MeetupActions extends Flux.Action{
-  
-  loadApiEvents(){
+    loadApiEvents(){
       fetch('https://assets.breatheco.de/apis/event/all')
           .then( (response) => {
             if (response.status !== 200) {
@@ -20,7 +17,7 @@ class MeetupActions extends Flux.Action{
               this.dispatch('MeetupStore.loadDataEvents', data);  
           }).catch(error => {
             this.dispatch('MeetupStore.error', error);
-          });
+      });
           
       fetch('https://www.4geeksacademy.co/wp-json/4g/v1/courses')
           .then( (response) => {
@@ -38,11 +35,8 @@ class MeetupActions extends Flux.Action{
               this.dispatch('MeetupStore.loadDataCourses', data);  
           }).catch(error => {
             this.dispatch('MeetupStore.error', error);
-          });
-  }
-  
-  
-  
+      });
+    }
 }
 
 var meetupActions = new MeetupActions();
