@@ -127,7 +127,7 @@ class Dashboard extends React.Component {
                     
                 </div>
                 <Grid container spacing={0} style={{justifyContent: 'center'}} >
-                    <Grid item xs md={8} >
+                    <Grid item xs md={7} xl={5} >
                         <AppBar style={{padding:"16px 0 0 0", display: "flex", flexDirection: "row", flexWrap: "wrap", zIndex: 10, justifyContent: "center"}} position="sticky" color="default">
                             <div style={{display: "flex", flexWrap: "no-wrap", alignItems: "baseline"}}>
                                 <Typography component="h1" variant="headline" style={{fontSize:"1rem"}}>

@@ -274,6 +274,7 @@ class Event extends React.Component {
                                         
                                     </CardActions>
                                     <Button 
+                                        id="fabButton"
                                         variant="fab" 
                                         color="secondary" 
                                         className={classNames(classes.button, classes.fab)} 
