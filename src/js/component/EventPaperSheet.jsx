@@ -93,7 +93,7 @@ class EventPaperSheet extends React.Component {
         
         const lang = event.lang || event.language || null;
         const title = event.title || "New Cohort";
-        const description = this.stripHTML(event.description);//|| "A Premium Program designed to launch your career as a developer. Learn the fundamentals of coding and build applications using HTML5, CSS3, React.js, and Python. Integrate your application(s) with other platforms and create your own API. This course offers a dedicated career support team as well as: one-on-one coaching with our Senior mentors; networking opportunities; and introductions to potential employers.";
+        const description = this.stripHTML(event.description);
         const cta = types.indexOf(event.type) > -1 ? "RSVP" : "APPLY";
         
         const titleComp = (

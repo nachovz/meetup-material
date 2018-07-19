@@ -1,5 +1,5 @@
 import React from "react";
-import Flux from "@4geeksacademy/react-flux-dash";
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -13,7 +13,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
-import meetupStore from '../stores/MeetupStore.jsx';
+import {Consumer} from '../stores/AppContext.jsx';
 
 const styles = theme => ({
   root: theme.mixins.gutters({
@@ -68,28 +68,16 @@ const styles = theme => ({
   
 });
 
-class Dashboard extends Flux.View {
+class Dashboard extends React.Component {
     
     constructor(){
         super();
         
         this.state = {
-            events: meetupStore.getAllEvents(),
-            locations: meetupStore.getLocations(),
             filter: 'All',
             locationFilter: 'All',
             languageFilter: 'All'
         };
-        
-        this.bindStore(meetupStore, function(){
-            this.setState({
-                events: meetupStore.getAllEvents(),
-                locations: meetupStore.getLocations(),
-                filter: 'All',
-                locationFilter: 'All',
-                languageFilter: 'All'
-            });
-        });
         this.handleChange = this.handleChange.bind(this);
     }
     
@@ -108,26 +96,31 @@ class Dashboard extends Flux.View {
                     <Typography component="h1" variant="display1" color="inherit" className={classes.heroText}>Select a location:  </Typography>
                     <form autoComplete="off">
                         <FormControl className={classes.inlineForm} id="heroSelect">
-                            <Select
-                                value={this.state.locationFilter}
-                                onChange={this.handleChange}
-                                inputProps={{
-                                    name: 'locationFilter',
-                                    id: 'location-simple'
-                                }}
-                                className={classes.primaryTextColor}
-                                style={{border: "1px solid white", padding: "0 5px", fontSize:"2em"}}
-                                >
-                                <MenuItem value="All">
-                                    <em>All</em>
-                                </MenuItem>
-                                {
-                                    this.state.locations.map( (locat, index) => {
-                                        return <MenuItem value={locat.slug} key={index}>{locat.name}</MenuItem>;
-                                    })
+                            <Consumer>
+                                {({ actions }) => 
+                                    (
+                                        <Select
+                                            value={this.state.locationFilter}
+                                            onChange={this.handleChange}
+                                            inputProps={{
+                                                name: 'locationFilter',
+                                                id: 'location-simple'
+                                            }}
+                                            className={classes.primaryTextColor}
+                                            style={{border: "1px solid white", padding: "0 5px", fontSize:"2em"}}
+                                            >
+                                            <MenuItem value="All">
+                                                <em>All ({actions.getAllEvents().length})</em>
+                                            </MenuItem>
+                                            {
+                                                actions.getAllLocations().map( (locat, index) => {
+                                                    return <MenuItem value={locat.slug} key={index}>{locat.name} ({locat.count})</MenuItem>;
+                                                })
+                                            }
+                                        </Select>
+                                    )
                                 }
-                                
-                            </Select>
+                            </Consumer>
                         </FormControl>
                     </form> 
                     <Typography component="h1" variant="display1" color="inherit" className={classes.heroText}>to discover our available courses, workshops and events.</Typography>
@@ -190,23 +183,27 @@ class Dashboard extends Flux.View {
                                 </form>
                             </div>
                         </AppBar>
-                        {
-                            this.state.events.length < 1 ? 
-                                <PaperSheet text="No Events"/>
-                            : this.state.events.map((event, index) =>{
-                                if( (this.state.filter === event.type || this.state.filter === '' || this.state.filter === 'All') 
-                                    && 
-                                    (this.state.locationFilter === event.location_slug || this.state.locationFilter === '' || this.state.locationFilter === 'All')
-                                    &&
-                                    (this.state.languageFilter === event.lang || this.state.languageFilter === event.language || this.state.languageFilter === '' || this.state.languageFilter === 'All')
-                                    &&
-                                    (!event.finished)
-                                ) return(
-                                    <EventPaperSheet key={index} event={event}/>
-                                );
-                            })
-                        }
-                        
+                        <Consumer>
+                            {({ actions }) =>
+                                {
+                                    const events = actions.getAllEvents();
+                                    return(
+                                        events.length < 1 ? 
+                                            <PaperSheet text="No Events"/>
+                                        : events.map((event, index) =>{
+                                            if( (this.state.filter === event.type || this.state.filter === '' || this.state.filter === 'All') 
+                                                && 
+                                                (this.state.locationFilter === event.location_slug || this.state.locationFilter === '' || this.state.locationFilter === 'All')
+                                                &&
+                                                (this.state.languageFilter === event.lang || this.state.languageFilter === event.language || this.state.languageFilter === '' || this.state.languageFilter === 'All')
+                                            ) return(
+                                                <EventPaperSheet key={index} event={event}/>
+                                            );
+                                        })
+                                    );
+                                }
+                            }
+                        </Consumer>
                     </Grid>
                 </Grid>
             </div>
@@ -215,3 +212,6 @@ class Dashboard extends Flux.View {
 }
 
 export default withStyles(styles)(Dashboard);
+Dashboard.propTypes = {
+    classes: PropTypes.object
+};
